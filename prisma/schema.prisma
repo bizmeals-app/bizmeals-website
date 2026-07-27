@@ -1,0 +1,222 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Admin Authentication ───
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // hashed password
+  name      String
+  role      String   @default("admin") // super_admin, admin, editor
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Blog Posts ───
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String   @default("")
+  content     String   @default("") // Full article content in markdown
+  category    String   @default("General") // Career Training, Digital Marketing, Business Growth, Startup Insights, Freelancing
+  tags        String   @default("") // comma-separated
+  image       String   @default("") // image URL
+  authorName  String   @default("BizMeals")
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  readTime    String   @default("5 min")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Job / Career Posts ───
+
+model Job {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @default("")
+  location        String   @default("Bangalore, India")
+  type            String   @default("full-time") // full-time, part-time, remote, internship, freelance
+  department      String   @default("General")
+  salary          String   @default("")
+  requirements    String   @default("") // comma-separated or multiline
+  responsibilities String  @default("")
+  applyLink       String   @default("")
+  status          String   @default("open") // draft, open, closed
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ─── Training Programs / Courses ───
+
+model TrainingCourse {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @default("") // Short description
+  fullDescription String   @default("") // Full description, multiline separated by |
+  duration        String   @default("90 Days")
+  skills          String   @default("") // comma-separated
+  includes        String   @default("") // comma-separated
+  outcome         String   @default("")
+  icon            String   @default("GraduationCap") // Lucide icon name
+  joinLink        String   @default("https://bizmeals.in/bizmeals-training-program/")
+  highlights      String   @default("") // comma-separated
+  accent          String   @default("biz-purple") // accent color key
+  order           Int      @default(0)
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ─── Business Updates / Announcements ───
+
+model BusinessUpdate {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @default("")
+  type        String   @default("announcement") // announcement, achievement, news, milestone, update
+  image       String   @default("")
+  link        String   @default("")
+  published   Boolean  @default(true)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Portfolio Projects ───
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  client      String   @default("")
+  description String   @default("")
+  category    String   @default("Digital Marketing") // Digital Marketing, BPO, Consultancy, Events, Web Development
+  image       String   @default("")
+  results     String   @default("") // comma-separated key results
+  technologies String  @default("") // comma-separated
+  duration    String   @default("")
+  testimonial String   @default("") // client testimonial
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Pricing Plans ───
+
+model PricingPlan {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String   @default("")
+  price       String   @default("") // e.g. "₹9,999", "Custom"
+  period      String   @default("/month") // /month, /project, one-time
+  features    String   @default("") // comma-separated
+  highlight   Boolean  @default(false) // Most popular
+  category    String   @default("marketing") // marketing, bpo, consultancy, events
+  ctaText     String   @default("Get Started")
+  ctaLink     String   @default("/contact")
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── Case Studies ───
+
+model CaseStudy {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  client        String   @default("")
+  industry      String   @default("")
+  challenge     String   @default("")
+  solution      String   @default("")
+  results       String   @default("") // comma-separated key metrics
+  image         String   @default("")
+  testimonial   String   @default("")
+  testimonialAuthor String @default("")
+  testimonialRole   String @default("")
+  category      String   @default("Digital Marketing")
+  featured      Boolean  @default(false)
+  published     Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// ─── Site Settings (Flexible Key-Value Store) ───
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @default("")
+  type  String @default("text") // text, json, number, boolean
+  label String @default("") // Human-readable label
+  group String @default("general") // general, contact, social, seo, appearance
+}
+
+// ─── Custom Forms (Flexible Form Builder) ───
+
+model CustomForm {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @default("")
+  fields      String   @default("[]") // JSON array of field definitions
+  published   Boolean  @default(false)
+  submitLabel String   @default("Submit")
+  successMsg  String   @default("Thank you for your submission!")
+  notifyEmail String   @default("") // email to notify on submission
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  submissions CustomFormSubmission[]
+}
+
+model CustomFormSubmission {
+  id        String     @id @default(cuid())
+  formId    String
+  form      CustomForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+  data      String     @default("{}") // JSON object with field values
+  read      Boolean    @default(false)
+  createdAt DateTime   @default(now())
+}
+
+// ─── Keep existing User model for compatibility ───
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
