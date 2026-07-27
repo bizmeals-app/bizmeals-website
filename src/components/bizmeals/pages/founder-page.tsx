@@ -65,15 +65,12 @@ const skills = [
 ]
 
 const timeline = [
-  { year: '2013', text: 'Started career in digital marketing and business growth' },
-  { year: '2015', text: 'Built first successful campaigns for local businesses in Bangalore' },
-  { year: '2017', text: 'Expanded into business consulting and BPO services' },
-  { year: '2019', text: 'Assembled a network of 20+ industry specialists' },
-  { year: '2021', text: 'Founded BizMeals as a Growth Execution Partner' },
-  { year: '2022', text: 'Grew to 30+ expert network across India' },
-  { year: '2023', text: 'Served 100+ businesses across India' },
-  { year: '2024', text: 'Launched training programs and innovation lab' },
-  { year: '2025', text: 'Expanding to global markets with AI-powered solutions' },
+  { year: '2019', text: 'Started career in digital marketing — learning the craft of growth, leads, and online brand-building from the ground up' },
+  { year: '2021', text: 'Stepped into entrepreneurship — built and tested his own startup ideas, learning firsthand what it takes to launch and run a business' },
+  { year: '2022', text: 'Founded BizMeals as a Business Growth Execution Partner — turning hard-won lessons into a repeatable system for other business owners' },
+  { year: '2023', text: 'Helped business owners across Bangalore implement growth strategies and started building a network of specialists' },
+  { year: '2024', text: 'Grew BizMeals into a trusted growth partner — expanding service lines and the expert network to serve more businesses' },
+  { year: '2025', text: 'Today: growing a successful business while helping other business owners do the same — with a clear 10-year vision to become one of India\'s top entrepreneurs' },
 ]
 
 const howHeHelps = [
@@ -194,7 +191,7 @@ export default function FounderPage() {
         <motion.div variants={fadeUp} className="float-animation mb-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20">
             <Sparkles className="w-4 h-4 text-[#F5A623]" />
-            <span className="text-xs sm:text-sm font-semibold text-white">12+ Years of Building Businesses</span>
+            <span className="text-xs sm:text-sm font-semibold text-white">Entrepreneur & Business Growth Builder</span>
           </div>
         </motion.div>
 
@@ -257,7 +254,7 @@ export default function FounderPage() {
             </motion.div>
 
             <motion.p variants={fadeUp} className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
-              From a small-town dreamer to building BizMeals — a platform that&apos;s redefining how businesses grow. Manjunatha started with a simple belief: <span className="text-foreground font-semibold">businesses don&apos;t need more advice, they need execution partners who deliver results.</span>
+              Manjunatha Reddy Polaka started his career in <span className="text-foreground font-semibold">digital marketing in 2019</span>, learning the craft of growth, leads, and online brand-building from the ground up. Driven by an entrepreneurial itch, he soon stepped into building his own <span className="text-foreground font-semibold">startup and business ventures</span> — testing, failing, and learning what actually makes a business work. Those lessons became BizMeals: a Business Growth Execution Partner that helps other business owners grow with the same hands-on, execution-first approach. Today he is building a successful business, helping other business owners do the same, and working towards a clear goal — <span className="text-foreground font-semibold">becoming one of India&apos;s top entrepreneurs in the next 10 years.</span>
             </motion.p>
           </div>
         </motion.div>
@@ -489,7 +486,7 @@ export default function FounderPage() {
           <div className="relative z-10">
             <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-biz-purple/30 mx-auto mb-4 sm:mb-6" />
             <blockquote className="text-sm sm:text-base md:text-lg font-semibold text-foreground leading-relaxed italic">
-              &ldquo;I don&apos;t just advise businesses — I build them. Every strategy I create, I execute myself first.&rdquo;
+              &ldquo;I started in digital marketing, built my own businesses, and learned what works the hard way. Now I help other business owners grow — and I&apos;m building BizMeals into one of India&apos;s most respected growth companies over the next decade.&rdquo;
             </blockquote>
             <div className="mt-4 sm:mt-6">
               <p className="text-xs sm:text-sm font-bold gradient-text">Manjunatha Reddy Polaka</p>

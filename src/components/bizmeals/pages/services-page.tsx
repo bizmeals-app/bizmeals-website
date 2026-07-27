@@ -338,6 +338,59 @@ function ServiceBlock({ service, index }: { service: Service; index: number }) {
                 <p className="text-xs text-[#1A1A1A] font-bold leading-relaxed">{service.outcome}</p>
               </div>
             </div>
+
+            {/* ── Direct CTA — let interested clients connect instantly ── */}
+            <div className="mt-6 p-4 sm:p-5 rounded-2xl border border-[#0F2557]/10 bg-[#0F2557]/[0.03]">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                <div className="flex items-start gap-2.5">
+                  <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #0F2557 0%, #1E3A8A 100%)' }}
+                  >
+                    <Handshake className="w-4 h-4 text-[#F5A623]" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-[#0F2557] leading-tight">
+                      Interested in {service.title}?
+                    </p>
+                    <p className="text-[11px] text-[#5A6478] mt-0.5">
+                      Connect with us directly — we&apos;ll discuss your goals &amp; build a plan.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  {/* WhatsApp — primary, pre-filled with service name */}
+                  <a
+                    href={`${siteConfig.contact.whatsappHref.split('?')[0]}?text=${encodeURIComponent(`Hi BizMeals, I'm interested in your "${service.title}" service. I'd like to discuss a growth opportunity for my business.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Chat on WhatsApp about ${service.title}`}
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-[#25D366] text-white text-xs font-bold hover:bg-[#1ebe5d] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 shadow-sm shadow-[#25D366]/30 cursor-pointer"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">WhatsApp</span>
+                    <span className="sm:hidden">Chat</span>
+                  </a>
+                  {/* Call */}
+                  <a
+                    href={siteConfig.contact.phoneHref}
+                    aria-label={`Call BizMeals about ${service.title}`}
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-[#0F2557] text-white text-xs font-bold hover:bg-[#1E3A8A] hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 cursor-pointer"
+                  >
+                    <Phone className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Call</span>
+                  </a>
+                  {/* Email */}
+                  <a
+                    href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Inquiry: ${service.title} — BizMeals`)}&body=${encodeURIComponent(`Hi BizMeals,\n\nI'm interested in your "${service.title}" service.\n\nPlease share more details.\n\nThanks.`)}`}
+                    aria-label={`Email BizMeals about ${service.title}`}
+                    className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-white border border-[#E5E9F0] text-[#0F2557] text-xs font-bold hover:border-[#0F2557]/30 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 cursor-pointer"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Email</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

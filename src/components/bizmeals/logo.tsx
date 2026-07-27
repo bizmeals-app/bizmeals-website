@@ -46,6 +46,23 @@ export default function Logo({
   const orange = '#F37021'
   const ink = isLight ? '#FFFFFF' : '#0F0F0F'
 
+  // On dark backgrounds (footer), the dark portions of the icon mark would
+  // blend into the navy. A white circular "badge" behind the mark makes it
+  // pop — matching the original brand design intent.
+  const circleD = h // circle diameter = icon mark height
+
+  const icon = (
+    <img
+      src="/logo-icon.png"
+      alt="BizMeals"
+      width={w}
+      height={h}
+      className="block shrink-0"
+      style={{ height: h, width: w, objectFit: 'contain' }}
+      draggable={false}
+    />
+  )
+
   return (
     <motion.span
       whileHover={{ scale: 1.03 }}
@@ -53,15 +70,28 @@ export default function Logo({
       className={`inline-flex items-center gap-2 ${className}`}
     >
       {/* ── Icon mark — client-approved image, tight-cropped ── */}
-      <img
-        src="/logo-icon.png"
-        alt="BizMeals"
-        width={w}
-        height={h}
-        className="block shrink-0"
-        style={{ height: h, width: w, objectFit: 'contain' }}
-        draggable={false}
-      />
+      {isLight ? (
+        <span
+          className="relative inline-flex items-center justify-center shrink-0"
+          style={{ width: w, height: h }}
+        >
+          {/* White circular badge behind the mark (footer / dark bg) */}
+          <span
+            aria-hidden="true"
+            className="absolute rounded-full bg-white"
+            style={{
+              width: circleD,
+              height: circleD,
+              left: (w - circleD) / 2,
+              top: 0,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            }}
+          />
+          <span className="relative z-10">{icon}</span>
+        </span>
+      ) : (
+        icon
+      )}
 
       {/* ── Wordmark — "Biz" + "Meals" ── */}
       {showText && (

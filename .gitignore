@@ -76,6 +76,7 @@ test
 /upload/
 worklog.md
 Caddyfile
+DEPLOY-GUIDE.md
 
 # Preview / screenshot images (dev only)
 preview-*.png
