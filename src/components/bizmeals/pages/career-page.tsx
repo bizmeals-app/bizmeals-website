@@ -32,9 +32,13 @@ import {
   HandHeart,
   ArrowUpRight,
   Headphones,
+  Megaphone,
+  ExternalLink,
+  MessageCircle,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePage } from '@/components/bizmeals/page-context'
+import { siteConfig } from '@/lib/site-config'
 
 /* ═════════════════════════════════════════════════════════════════════════
    ANIMATION VARIANTS
@@ -283,6 +287,101 @@ const openRoles: OpenRole[] = [
   },
 ]
 
+/* ── Job Descriptions (detailed JDs for currently-hiring roles) ── */
+interface JobDescription {
+  icon: React.ElementType
+  title: string
+  type: string
+  location: string
+  experience: string
+  responsibilities: string[]
+  requirements: string[]
+  whatYouWillDo: string
+  applyHref: string
+  applyLabel: string
+}
+
+const jobDescriptions: JobDescription[] = [
+  {
+    icon: Users,
+    title: 'HR Executive / HR Recruiter',
+    type: 'Full-time',
+    location: 'Bangalore',
+    experience: '0-2 years',
+    responsibilities: [
+      'End-to-end recruitment (sourcing, screening, shortlisting)',
+      'Coordinating interviews',
+      'Onboarding new hires',
+      'Maintaining HR records',
+      'Employee engagement',
+      'Payroll support',
+    ],
+    requirements: [
+      'Good communication skills',
+      'Familiarity with job portals (Naukri, LinkedIn, etc.)',
+      'MBA / Graduation in HR or related field preferred',
+      '0-2 years experience',
+      'Strong organizational skills',
+    ],
+    whatYouWillDo:
+      'Hire for our internal team AND support hiring for partner companies across IT & Non-IT domains. You will be the bridge between talent and opportunity — placing the right people in the right roles.',
+    applyHref: siteConfig.forms.bdeHrSales,
+    applyLabel: 'Apply Now',
+  },
+  {
+    icon: Briefcase,
+    title: 'Business Development Executive (BDE)',
+    type: 'Full-time',
+    location: 'Bangalore',
+    experience: '0-2 years',
+    responsibilities: [
+      'Lead generation',
+      'Client outreach & pitching',
+      'Closing deals',
+      'Maintaining client relationships',
+      'Meeting monthly targets',
+      'Market research',
+    ],
+    requirements: [
+      'Excellent communication & presentation skills',
+      'Sales mindset, goal-oriented',
+      'MBA / Graduation preferred',
+      '0-2 years experience',
+      'Hunger to grow',
+    ],
+    whatYouWillDo:
+      'Bring in new business clients for our 360° growth services (marketing, startup support, finance, IT, BPO) and onboard candidates for training programs. You will own the front of the funnel.',
+    applyHref: siteConfig.forms.bdeHrSales,
+    applyLabel: 'Apply Now',
+  },
+  {
+    icon: Laptop,
+    title: 'Freelancer / Project Associate (Multiple Domains)',
+    type: 'Freelance / Full-time (flexible)',
+    location: 'Remote / Bangalore',
+    experience: 'Open',
+    responsibilities: [
+      'Digital Marketing (SEO, SMM, Ads, Content)',
+      'Graphic Design & Video Editing',
+      'Sales & Business Development',
+      'Web Development & Tech Support',
+      'BPO & Customer Support',
+      'Deliver on agreed deadlines',
+    ],
+    requirements: [
+      'Relevant skills for the chosen domain',
+      'Portfolio / work samples',
+      'Self-motivated, owner mindset',
+      'Ability to deliver on deadlines',
+      'Open to freelance or full-time',
+    ],
+    whatYouWillDo:
+      'Work on exciting projects across industries with flexible opportunities (freelance or full-time), competitive payouts, career growth, and the chance to be part of an innovative team.',
+    applyHref: siteConfig.forms.freelancerOnboarding,
+    applyLabel: 'Apply as Freelancer',
+  },
+]
+
 interface QAItem {
   question: string
   answer: string
@@ -362,6 +461,18 @@ export default function CareerPage() {
 
   const ctaRef = useRef<HTMLDivElement>(null)
   const ctaInView = useInView(ctaRef, { once: true, margin: '-80px' })
+
+  const hiringBannerRef = useRef<HTMLDivElement>(null)
+  const hiringBannerInView = useInView(hiringBannerRef, { once: true, margin: '-80px' })
+
+  const jdRef = useRef<HTMLDivElement>(null)
+  const jdInView = useInView(jdRef, { once: true, margin: '-80px' })
+
+  const trainingRef = useRef<HTMLDivElement>(null)
+  const trainingInView = useInView(trainingRef, { once: true, margin: '-80px' })
+
+  const partnerRef = useRef<HTMLDivElement>(null)
+  const partnerInView = useInView(partnerRef, { once: true, margin: '-80px' })
 
   /* ═══════════════════════════════════════════════════════
      1. HERO
@@ -477,6 +588,240 @@ export default function CareerPage() {
           ))}
         </motion.div>
       </motion.div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     1b. WE'RE HIRING NOW — HIGHLIGHT BANNER
+     ═══════════════════════════════════════════════════════ */
+
+  const renderHiringBanner = () => (
+    <section
+      ref={hiringBannerRef}
+      className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #F5A623 0%, #E8951A 45%, #0F2557 100%)' }}
+    >
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-16 right-1/4 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute bottom-0 -left-10 w-60 h-60 rounded-full bg-[#0F2557]/25 blur-3xl" />
+      </div>
+
+      <motion.div
+        initial="hidden"
+        animate={hiringBannerInView ? 'visible' : 'hidden'}
+        variants={staggerContainer}
+        className="relative z-10 max-w-5xl mx-auto text-center"
+      >
+        <motion.div
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1A1A1A] border border-white/20 mb-5"
+        >
+          <Megaphone className="w-3.5 h-3.5 text-[#F5A623]" />
+          <span className="text-[11px] font-bold tracking-widest uppercase text-[#F5A623]">
+            🔥 We&apos;re Hiring Now
+          </span>
+        </motion.div>
+
+        <motion.h2
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight leading-tight"
+        >
+          Currently Hiring: HR, BDEs &amp; Freelancers
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUp}
+          className="text-sm sm:text-base text-white/85 max-w-2xl mx-auto leading-relaxed mb-6"
+        >
+          We&apos;re actively recruiting for multiple roles across our Bangalore team and remote network.
+          If you&apos;re a builder who owns your work, we want to talk.
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-wrap items-center justify-center gap-2.5 mb-7"
+        >
+          {[
+            'HR Executives',
+            'Business Development Executives (BDEs)',
+            'Freelancers (Multiple Domains)',
+          ].map((role) => (
+            <span
+              key={role}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-white text-xs sm:text-sm font-semibold"
+            >
+              <Briefcase className="w-3.5 h-3.5 text-[#1A1A1A]" />
+              {role}
+            </span>
+          ))}
+        </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
+        >
+          <a
+            href={siteConfig.forms.bdeHrSales}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-black text-white font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+          >
+            <Briefcase className="w-4 h-4" />
+            Apply for Full-time Roles (HR/BDE/Sales)
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+          <a
+            href={siteConfig.forms.freelancerOnboarding}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white hover:bg-white/90 text-[#0F2557] font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+          >
+            <Laptop className="w-4 h-4" />
+            Join as a Freelancer
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </motion.div>
+      </motion.div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     1c. JOB DESCRIPTIONS — DETAILED JDs
+     ═══════════════════════════════════════════════════════ */
+
+  const renderJDs = () => (
+    <section ref={jdRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate={jdInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFF7E6] border border-[#F5A623]/20 mb-4"
+          >
+            <Briefcase className="w-3.5 h-3.5 text-[#F5A623]" />
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#0F2557]">
+              Job Descriptions
+            </span>
+          </motion.div>
+          <motion.h2
+            variants={fadeUp}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0F2557] mb-4 tracking-tight"
+          >
+            Open Roles — Detailed JDs
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="text-sm sm:text-base text-[#5A6478] max-w-2xl mx-auto leading-relaxed"
+          >
+            Clear, professional job descriptions for our currently-hiring roles. Read the responsibilities,
+            requirements, and what you will actually do — then apply with one click.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          animate={jdInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="space-y-6"
+        >
+          {jobDescriptions.map((jd, i) => (
+            <motion.div
+              key={jd.title}
+              variants={fadeUp}
+              custom={i}
+              className="group bg-white rounded-2xl border border-[#E5E9F0] overflow-hidden hover:border-[#F5A623]/40 hover:shadow-xl hover:shadow-[#0F2557]/5 transition-all duration-300"
+            >
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#EEF2FA] flex items-center justify-center shrink-0 group-hover:bg-[#0F2557] transition-colors duration-300">
+                    <jd.icon className="w-6 h-6 text-[#0F2557] group-hover:text-[#F5A623] transition-colors duration-300" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#0F2557] mb-2">{jd.title}</h3>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#FFF7E6] text-[#0F2557] border border-[#F5A623]/20">
+                        {jd.type}
+                      </span>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#EEF2FA] text-[#0F2557] border border-[#0F2557]/10">
+                        {jd.location}
+                      </span>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#F5F7FA] text-[#0F2557] border border-[#E5E9F0]">
+                        {jd.experience}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-start">
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F2557] mb-3 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#F5A623]" />
+                      Responsibilities
+                    </h4>
+                    <ul className="space-y-1.5">
+                      {jd.responsibilities.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-xs text-[#5A6478] leading-relaxed"
+                        >
+                          <Check className="w-3 h-3 text-[#F5A623] shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F2557] mb-3 flex items-center gap-1.5">
+                      <Award className="w-3.5 h-3.5 text-[#F5A623]" />
+                      Requirements
+                    </h4>
+                    <ul className="space-y-1.5">
+                      {jd.requirements.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-xs text-[#5A6478] leading-relaxed"
+                        >
+                          <Check className="w-3 h-3 text-[#F5A623] shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F2557] mb-3 flex items-center gap-1.5">
+                      <Target className="w-3.5 h-3.5 text-[#F5A623]" />
+                      What You&apos;ll Do at BizMeals
+                    </h4>
+                    <p className="text-xs text-[#5A6478] leading-relaxed">{jd.whatYouWillDo}</p>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-[#E5E9F0] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <p className="text-xs text-[#5A6478]">
+                    Ready to join? Apply via the official Google Form — opens in a new tab.
+                  </p>
+                  <a
+                    href={jd.applyHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#0F2557] hover:bg-[#1A3A6E] text-white font-bold px-5 py-2.5 text-sm rounded-xl h-auto transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group/btn self-start sm:self-auto whitespace-nowrap"
+                  >
+                    <Mail className="w-4 h-4" />
+                    {jd.applyLabel}
+                    <ExternalLink className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   )
 
@@ -818,6 +1163,213 @@ export default function CareerPage() {
   )
 
   /* ═══════════════════════════════════════════════════════
+     5b. TRAINING PROGRAM — 40+ DIGITAL MARKETING OPENINGS
+     ═══════════════════════════════════════════════════════ */
+
+  const renderTrainingProgram = () => (
+    <section ref={trainingRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#F5F7FA]">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate={trainingInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          <motion.div
+            variants={scaleIn}
+            className="relative overflow-hidden rounded-3xl p-6 sm:p-10 mb-8"
+            style={{ background: 'linear-gradient(135deg, #0F2557 0%, #1A3A6E 100%)' }}
+          >
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#F5A623]/15 blur-3xl" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-[#F5A623]/10 blur-3xl" />
+            <div className="relative z-10 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-[#F5A623]/30 backdrop-blur-sm mb-4">
+                <GraduationCap className="w-3.5 h-3.5 text-[#F5A623]" />
+                <span className="text-[11px] font-bold tracking-widest uppercase text-[#F5A623]">
+                  Training Program · Career Building
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                40+ Immediate Openings in Digital Marketing
+              </h2>
+              <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
+                BizMeals Management Solutions Pvt Ltd — a professional business growth and career-building
+                company creating real job opportunities for students, freshers, working professionals, and
+                career-gap candidates across IT &amp; Non-IT industries.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="bg-white rounded-2xl border border-[#E5E9F0] p-6 sm:p-8 mb-6"
+          >
+            <h3 className="text-lg sm:text-xl font-bold text-[#0F2557] mb-5 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#F5A623]" />
+              What Makes Us Different
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                'We onboard candidates only when real job opportunities exist',
+                'Industry-ready training by working professionals',
+                'Live projects + internship + freelancing exposure',
+                'Direct job opportunities through partner companies & our projects',
+              ].map((point, idx) => (
+                <div
+                  key={point}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-[#F5F7FA] border border-[#E5E9F0]"
+                >
+                  <div className="w-7 h-7 rounded-lg bg-[#F5A623] flex items-center justify-center text-[#1A1A1A] font-bold text-xs shrink-0">
+                    {idx + 1}
+                  </div>
+                  <span className="text-sm text-[#3D4452] leading-relaxed font-medium pt-0.5">
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="bg-[#FFF7E6] border border-[#F5A623]/20 rounded-2xl p-5 sm:p-6 mb-4 flex items-start gap-3"
+          >
+            <Quote className="w-5 h-5 text-[#F5A623] shrink-0 mt-0.5" />
+            <p className="text-sm text-[#3D4452] leading-relaxed italic">
+              We commit to candidates only when we have genuine vacancies. After onboarding, we train, guide,
+              and place candidates into real, growth-oriented career roles.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="bg-white border border-[#E5E9F0] rounded-2xl p-4 mb-8 flex items-start gap-3"
+          >
+            <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0 mt-0.5" />
+            <p className="text-xs text-[#5A6478] leading-relaxed">
+              <strong className="text-[#0F2557]">After registration:</strong> You will be added to the
+              official WhatsApp group for demo session updates and job notifications.
+            </p>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="text-center">
+            <a
+              href={siteConfig.forms.trainingProgram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#F5A623] hover:bg-[#E8951A] text-[#1A1A1A] font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg shadow-[#F5A623]/20 hover:shadow-xl hover:shadow-[#F5A623]/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+            >
+              <GraduationCap className="w-4 h-4" />
+              Register for Training Program
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     5c. PARTNER WITH BIZMEALS
+     ═══════════════════════════════════════════════════════ */
+
+  const renderPartner = () => (
+    <section ref={partnerRef} className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate={partnerInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FA] border border-[#0F2557]/10 mb-4"
+          >
+            <Handshake className="w-3.5 h-3.5 text-[#0F2557]" />
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#0F2557]">
+              Partner Network
+            </span>
+          </motion.div>
+          <motion.h2
+            variants={fadeUp}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0F2557] mb-4 tracking-tight"
+          >
+            Partner With BizMeals
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="text-sm sm:text-base text-[#5A6478] max-w-2xl mx-auto leading-relaxed"
+          >
+            Work with us as a freelancer, agency, or service provider. We bring you steady work from
+            diverse industries.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          animate={partnerInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10"
+        >
+          {[
+            {
+              icon: Briefcase,
+              title: 'Get Consistent Projects',
+              desc: 'Steady work from diverse industries — never a dry pipeline.',
+            },
+            {
+              icon: TrendingUp,
+              title: 'Boost Your Skills',
+              desc: 'Training and expert support to level up your craft.',
+            },
+            {
+              icon: Network,
+              title: 'Expand Your Network',
+              desc: 'Connect with businesses and professionals across sectors.',
+            },
+            {
+              icon: Award,
+              title: 'Earn Fair & Timely Payments',
+              desc: 'We pay on time, every time — no chasing, no delays.',
+            },
+            {
+              icon: Laptop,
+              title: 'Flexible Collaboration',
+              desc: 'Freelance, agency, or service provider — your way.',
+            },
+          ].map((b, i) => (
+            <motion.div
+              key={b.title}
+              variants={scaleIn}
+              custom={i}
+              className="group bg-white rounded-2xl border border-[#E5E9F0] p-5 sm:p-6 hover:border-[#F5A623]/40 hover:shadow-lg hover:shadow-[#0F2557]/5 transition-all duration-300"
+            >
+              <div className="w-11 h-11 rounded-xl bg-[#EEF2FA] flex items-center justify-center mb-4 group-hover:bg-[#0F2557] transition-colors duration-300">
+                <b.icon className="w-5 h-5 text-[#0F2557] group-hover:text-[#F5A623] transition-colors duration-300" />
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-[#0F2557] mb-2">{b.title}</h3>
+              <p className="text-xs text-[#5A6478] leading-relaxed">{b.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="text-center">
+          <a
+            href={siteConfig.forms.businessPartner}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#0F2557] hover:bg-[#1A3A6E] text-white font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg shadow-[#0F2557]/20 hover:shadow-xl hover:shadow-[#0F2557]/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+          >
+            <Handshake className="w-4 h-4" />
+            Partner With Us
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
      6. OPEN ROLES AT BIZMEALS
      ═══════════════════════════════════════════════════════ */
 
@@ -890,14 +1442,35 @@ export default function CareerPage() {
               careers@bizmeals.in
             </a>
           </p>
-          <Button
-            onClick={() => setCurrentPage('contact')}
-            className="bg-[#0F2557] hover:bg-[#1A3A6E] text-white font-bold px-6 py-3 text-sm rounded-xl h-auto cursor-pointer border-0 group"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+            <a
+              href={siteConfig.forms.bdeHrSales}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#0F2557] hover:bg-[#1A3A6E] text-white font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+            >
+              <Briefcase className="w-4 h-4" />
+              Apply Now (HR/BDE/Sales)
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <a
+              href={siteConfig.forms.freelancerOnboarding}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white hover:bg-[#F5F7FA] text-[#0F2557] font-bold px-6 py-3 text-sm rounded-xl h-auto border border-[#0F2557]/20 shadow-sm transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+            >
+              <Laptop className="w-4 h-4" />
+              Apply as Freelancer
+              <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          </div>
+          <a
+            href={siteConfig.contact.phone2Href}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F2557] hover:text-[#F5A623] transition-colors"
           >
-            <Mail className="w-4 h-4 mr-2" />
-            Apply Now
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            <Phone className="w-3.5 h-3.5" />
+            Or call us: {siteConfig.contact.phone2}
+          </a>
         </motion.div>
       </div>
     </section>
@@ -1015,7 +1588,7 @@ export default function CareerPage() {
           the next step is yours. Career builders do not wait. They start.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3">
           <Button
             onClick={() => setCurrentPage('training')}
             className="bg-[#F5A623] hover:bg-[#E8951A] text-[#1A1A1A] font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg shadow-[#F5A623]/20 hover:shadow-xl hover:shadow-[#F5A623]/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group cursor-pointer border-0"
@@ -1024,6 +1597,26 @@ export default function CareerPage() {
             Apply for a Career Program
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
+          <a
+            href={siteConfig.forms.trainingProgram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#F5A623] hover:bg-[#E8951A] text-[#1A1A1A] font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg shadow-[#F5A623]/20 hover:shadow-xl hover:shadow-[#F5A623]/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+          >
+            <GraduationCap className="w-4 h-4" />
+            Register for Training (40+ Openings)
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+          <a
+            href={siteConfig.forms.bdeHrSales}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#F5A623] hover:bg-[#E8951A] text-[#1A1A1A] font-bold px-6 py-3 text-sm rounded-xl h-auto shadow-lg shadow-[#F5A623]/20 hover:shadow-xl hover:shadow-[#F5A623]/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
+          >
+            <Briefcase className="w-4 h-4" />
+            Apply for Jobs (HR/BDE/Sales)
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
           <Button
             onClick={() => setCurrentPage('contact')}
             variant="outline"
@@ -1038,6 +1631,10 @@ export default function CareerPage() {
           <span className="flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5" />
             +91 8217330484
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Phone className="w-3.5 h-3.5" />
+            {siteConfig.contact.phone2}
           </span>
           <span className="flex items-center gap-1.5">
             <Mail className="w-3.5 h-3.5" />
@@ -1059,10 +1656,14 @@ export default function CareerPage() {
   return (
     <div className="overflow-x-hidden">
       {renderHero()}
+      {renderHiringBanner()}
+      {renderJDs()}
       {renderMindset()}
       {renderStories()}
       {renderSupport()}
       {renderHireGraduates()}
+      {renderTrainingProgram()}
+      {renderPartner()}
       {renderOpenRoles()}
       {renderQA()}
       {renderCTA()}

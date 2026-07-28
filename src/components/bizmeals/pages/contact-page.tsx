@@ -83,7 +83,7 @@ const contactInfoCards = [
     icon: Phone,
     title: 'Phone',
     detail: '+91 8217330484',
-    sub: 'Mon–Fri: 9am–6pm IST',
+    sub: '+91 8073568735  ·  Mon–Fri: 9am–6pm IST',
     gradient: 'from-biz-amber to-biz-orange',
     iconBg: 'bg-biz-amber/10',
     iconColor: 'text-biz-amber',
@@ -696,6 +696,13 @@ export default function ContactPage() {
           >
             <Phone className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
             +91 8217330484
+          </a>
+          <a
+            href="tel:+918073568735"
+            className="inline-flex items-center border border-biz-amber/30 text-biz-amber hover:bg-biz-amber/10 hover:border-biz-amber/50 font-semibold px-6 sm:px-8 py-4 text-sm rounded-xl h-auto transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group backdrop-blur-sm bg-transparent"
+          >
+            <Phone className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
+            +91 8073568735
           </a>
           <a
             href="https://wa.me/918217330484"

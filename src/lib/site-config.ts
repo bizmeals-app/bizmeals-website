@@ -16,11 +16,43 @@ export const siteConfig = {
     email: 'info@bizmeals.in',
     phone: '+91 8217330484',
     phoneHref: 'tel:+918217330484',
+    // Secondary phone (careers / hiring / training)
+    phone2: '+91 8073568735',
+    phone2Href: 'tel:+918073568735',
     whatsappNumber: '918217330484',
     whatsappHref:
       'https://wa.me/918217330484?text=Hi%20BizMeals%2C%20I%27d%20like%20to%20discuss%20a%20growth%20opportunity%20for%20my%20business.',
     address: 'Bangalore, Karnataka, India',
     hrEmail: 'hr@bizmeals.in',
+    careersEmail: 'careers@bizmeals.in',
+  },
+
+  /* ── LinkedIn profiles (founders + company page) ── */
+  linkedin: {
+    company: 'https://www.linkedin.com/company/106474769/',
+    manjunatha: 'https://www.linkedin.com/in/polakamanjunathareddy/',
+    durga: 'https://www.linkedin.com/in/a-durga-prasad-791832146/',
+  },
+
+  /* ── Google Forms — application / registration links ──
+     Each form has a specific purpose. Use the right one in the right place. */
+  forms: {
+    // Full-time roles: BDEs, HR, Sales & Management hiring
+    bdeHrSales: 'https://forms.gle/kskoVdiDKGQ8t99X6',
+    // Training program registration (40+ Digital Marketing openings, career-building)
+    trainingProgram: 'https://forms.gle/p6omceCeksXK4ZE87',
+    // Business growth partner / client onboarding / collaborator registration
+    businessPartner: 'https://forms.gle/uAQMhk1WgfUsAN327',
+    // Freelancer & employee onboarding (Digital Marketing, Design, Sales, Web, BPO, etc.)
+    freelancerOnboarding: 'https://forms.gle/PSXbzQgDLfLUvZyf8',
+  },
+
+  /* ── Community & Network ──
+     The extended BizMeals ecosystem beyond the core team. */
+  community: {
+    freelancers: 1000,       // 1000+ freelancers community across industries
+    founders: 500,           // 500+ founders & business owners community
+    partnerCompanies: 0,     // partner companies (displayed as "Multiple" — not a fixed number)
   },
 
   /* ── Social — only real, BizMeals-branded profiles ── */
@@ -43,21 +75,22 @@ export const siteConfig = {
     avgRoi: 3.5,                // x
   },
 
-  /* ── Founder ── */
+  /* ── Team / Leadership ── */
   founder: {
     name: 'Manjunatha Reddy Polaka',
     role: 'Founder & CEO',
     email: 'info@bizmeals.in',
+    linkedin: 'https://www.linkedin.com/in/polakamanjunathareddy/',
     // NOTE: No photo field by design. The founder avatar uses "MR" initials
     // (consistent with testimonial avatars) until a real headshot is provided.
-    //
-    // REPLACE WITH REAL FOUNDER PHOTO:
-    //   1. Drop a real headshot at /public/images/founder.jpg
-    //   2. Uncomment the line below:
-    // photo: '/images/founder.jpg',
-    //   3. In src/components/bizmeals/pages/home-page.tsx (FounderSection),
-    //      swap the "MR" initials block back to an <img> using siteConfig.founder.photo.
     initials: 'MR',
+  },
+  coFounder: {
+    name: 'Durga Prasad',
+    role: 'Co-Founder & Leadership',
+    email: 'info@bizmeals.in',
+    linkedin: 'https://www.linkedin.com/in/a-durga-prasad-791832146/',
+    initials: 'DP',
   },
 
   /* ── SEO ── */

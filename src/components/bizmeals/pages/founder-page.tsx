@@ -11,6 +11,8 @@ import {
   TrendingUp,
   Zap,
   Users,
+  Network,
+  Building2,
   HandshakeIcon,
   Lightbulb,
   Eye,
@@ -22,9 +24,12 @@ import {
   Linkedin,
   Phone,
   Mail,
+  Code,
+  Megaphone,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePage } from '@/components/bizmeals/page-context'
+import { siteConfig } from '@/lib/site-config'
 
 /* ───────────────────────── animation variants ───────────────────────── */
 
@@ -54,6 +59,93 @@ const staggerContainer = {
 }
 
 /* ───────────────────────── data ───────────────────────── */
+
+const leaders = [
+  {
+    name: siteConfig.founder.name,
+    role: siteConfig.founder.role,
+    initials: siteConfig.founder.initials,
+    linkedin: siteConfig.founder.linkedin,
+    accent: 'biz-amber',
+    blurb:
+      "Started in digital marketing (2019), built startups, founded BizMeals — on a 10-year mission to become one of India's top entrepreneurs.",
+  },
+  {
+    name: siteConfig.coFounder.name,
+    role: siteConfig.coFounder.role,
+    initials: siteConfig.coFounder.initials,
+    linkedin: siteConfig.coFounder.linkedin,
+    accent: 'biz-teal',
+    blurb:
+      'Co-Founder at BizMeals, working alongside Manjunatha to build a 360° business growth partner.',
+  },
+]
+
+/* ── In-house teams (no individual names — just the functions that exist) ── */
+const teamDepartments = [
+  {
+    icon: Users,
+    title: 'HR & People',
+    accent: 'biz-purple',
+    description:
+      'Talent acquisition, onboarding, and culture — the team that builds and supports the people behind BizMeals.',
+  },
+  {
+    icon: HandshakeIcon,
+    title: 'Business Development (BDEs)',
+    accent: 'biz-teal',
+    description:
+      'Client acquisition, partnerships, and market expansion — opening doors and building long-term relationships.',
+  },
+  {
+    icon: Code,
+    title: 'Developers',
+    accent: 'biz-amber',
+    description:
+      'Web and product builders — websites, apps, and technical builds that are fast, reliable, and conversion-focused.',
+  },
+  {
+    icon: Megaphone,
+    title: 'Digital Marketing',
+    accent: 'biz-violet',
+    description:
+      'SEO, paid media, social, and content — the growth engine behind every client campaign we run.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Sales',
+    accent: 'biz-cyan',
+    description:
+      'Lead conversion, deal closure, and account growth — turning qualified opportunities into real revenue.',
+  },
+]
+
+const communityStats = [
+  {
+    icon: Users,
+    value: `${siteConfig.community.freelancers}+`,
+    label: 'Freelancers',
+    accent: 'biz-purple',
+    description:
+      'A community of skilled freelancers across digital marketing, design, development, sales, BPO, and more — working with us across industries.',
+  },
+  {
+    icon: Building2,
+    value: `${siteConfig.community.founders}+`,
+    label: 'Founders & Business Owners',
+    accent: 'biz-teal',
+    description:
+      'A network of founders and business owners across manufacturing, real estate, tech, retail, finance, education, and many more sectors.',
+  },
+  {
+    icon: HandshakeIcon,
+    value: 'Multiple',
+    label: 'Partner Companies',
+    accent: 'biz-amber',
+    description:
+      'We collaborate with partner companies who work alongside our freelancer team to deliver 360° growth for every client.',
+  },
+]
 
 const skills = [
   { icon: Target, label: 'Marketing Strategy', accent: 'biz-purple' },
@@ -128,6 +220,15 @@ export default function FounderPage() {
   const ctaRef = useRef<HTMLDivElement>(null)
   const ctaInView = useInView(ctaRef, { once: true, margin: '-80px' })
 
+  const leadershipRef = useRef<HTMLDivElement>(null)
+  const leadershipInView = useInView(leadershipRef, { once: true, margin: '-80px' })
+
+  const teamRef = useRef<HTMLDivElement>(null)
+  const teamInView = useInView(teamRef, { once: true, margin: '-80px' })
+
+  const communityRef = useRef<HTMLDivElement>(null)
+  const communityInView = useInView(communityRef, { once: true, margin: '-80px' })
+
   /* ═══════════════════════════════════════════════════════
      1. HERO
      ═══════════════════════════════════════════════════════ */
@@ -160,7 +261,7 @@ export default function FounderPage() {
             Home
           </button>
           <ChevronRight className="w-3 h-3 text-white/40" />
-          <span className="text-white font-medium">Founder</span>
+          <span className="text-white font-medium">Team & Leadership</span>
         </motion.div>
 
         {/* Avatar */}
@@ -191,14 +292,14 @@ export default function FounderPage() {
         <motion.div variants={fadeUp} className="float-animation mb-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20">
             <Sparkles className="w-4 h-4 text-[#F5A623]" />
-            <span className="text-xs sm:text-sm font-semibold text-white">Entrepreneur & Business Growth Builder</span>
+            <span className="text-xs sm:text-sm font-semibold text-white">Leading the BizMeals Team</span>
           </div>
         </motion.div>
 
         {/* Social Links */}
         <motion.div variants={fadeUp} className="flex items-center gap-3 mt-4">
           <a
-            href="https://www.linkedin.com/company/bizmeals"
+            href={siteConfig.founder.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-[#F5A623] hover:bg-white/10 border border-white/20 transition-all duration-300"
@@ -214,6 +315,13 @@ export default function FounderPage() {
             <span className="text-[10px] sm:text-[11px] font-semibold">+91 8217330484</span>
           </a>
           <a
+            href={siteConfig.contact.phone2Href}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-[#F5A623] hover:bg-white/10 border border-white/20 transition-all duration-300"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            <span className="text-[10px] sm:text-[11px] font-semibold">+91 8073568735</span>
+          </a>
+          <a
             href="mailto:info@bizmeals.in"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-[#F5A623] hover:bg-white/10 border border-white/20 transition-all duration-300"
           >
@@ -222,6 +330,295 @@ export default function FounderPage() {
           </a>
         </motion.div>
       </motion.div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     1.5. LEADERSHIP
+     ═══════════════════════════════════════════════════════ */
+
+  const renderLeadership = () => (
+    <section ref={leadershipRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+      <div className="absolute inset-0 mesh-gradient-services pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={leadershipInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <Users className="w-3.5 h-3.5 text-biz-purple" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Leadership</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">
+            Meet the <span className="gradient-text">Team & Leadership</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto">
+            The founders driving BizMeals&apos; mission to be a 360° business growth partner.
+          </motion.p>
+        </motion.div>
+
+        {/* Leader cards */}
+        <motion.div
+          initial="hidden"
+          animate={leadershipInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+        >
+          {leaders.map((leader, i) => (
+            <motion.div
+              key={leader.name}
+              variants={scaleIn}
+              custom={i}
+              className="group glass-card-strong rounded-2xl p-6 sm:p-8 card-hover relative overflow-hidden"
+            >
+              {/* Hover glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(300px circle at 50% 0%, ${
+                    leader.accent === 'biz-amber' ? 'rgba(245,166,35,0.08)' : 'rgba(30,58,138,0.08)'
+                  }, transparent 60%)`,
+                }}
+              />
+
+              <div className="relative z-10 flex flex-col items-center text-center">
+                {/* Avatar */}
+                <div
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shadow-lg mb-4 relative"
+                  style={{
+                    background: 'linear-gradient(135deg, #0F2557 0%, #1E3A8A 100%)',
+                    border: `2px solid ${leader.accent === 'biz-amber' ? 'rgba(245,166,35,0.4)' : 'rgba(30,58,138,0.4)'}`,
+                  }}
+                >
+                  <span className="text-2xl sm:text-3xl font-bold text-white">{leader.initials}</span>
+                  <div className="absolute inset-0 rounded-full border-2 border-white/10 animate-pulse" />
+                </div>
+
+                {/* Name */}
+                <h3 className="text-base sm:text-lg font-bold text-foreground">{leader.name}</h3>
+
+                {/* Role */}
+                <p
+                  className={`text-xs sm:text-sm font-semibold mb-3 ${
+                    leader.accent === 'biz-amber' ? 'text-biz-amber' : 'text-biz-teal'
+                  }`}
+                >
+                  {leader.role}
+                </p>
+
+                {/* Blurb */}
+                <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed mb-5">
+                  {leader.blurb}
+                </p>
+
+                {/* LinkedIn button */}
+                <a
+                  href={leader.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:text-[#F5A623] hover:bg-white/10 border border-white/20 transition-all duration-300"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  <span className="text-xs font-semibold">Connect on LinkedIn</span>
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     1.6. OUR TEAM (in-house functions — no individual names)
+     ═══════════════════════════════════════════════════════ */
+
+  const renderTeam = () => (
+    <section ref={teamRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+      <div className="absolute inset-0 mesh-gradient-services pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={teamInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <Users className="w-3.5 h-3.5 text-biz-amber" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Our Team</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">
+            The <span className="gradient-text">Teams</span> Behind BizMeals
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Beyond our founders, BizMeals is powered by dedicated in-house teams across every function — each one already in place and ready to deliver 360° growth.
+          </motion.p>
+        </motion.div>
+
+        {/* Team role cards */}
+        <motion.div
+          initial="hidden"
+          animate={teamInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+        >
+          {teamDepartments.map((dept, i) => (
+            <motion.div
+              key={dept.title}
+              variants={scaleIn}
+              custom={i}
+              className="group glass-card rounded-2xl p-5 sm:p-6 card-hover relative overflow-hidden"
+            >
+              {/* Hover glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(280px circle at 50% 50%, ${
+                    dept.accent === 'biz-purple' ? 'rgba(168,85,247,0.08)' :
+                    dept.accent === 'biz-teal' ? 'rgba(20,184,166,0.08)' :
+                    dept.accent === 'biz-amber' ? 'rgba(245,158,11,0.08)' :
+                    dept.accent === 'biz-violet' ? 'rgba(139,92,246,0.08)' :
+                    'rgba(6,182,212,0.08)'
+                  }, transparent 60%)`,
+                }}
+              />
+
+              <div className="relative z-10 flex items-start gap-4">
+                {/* Icon */}
+                <div className={`shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-${dept.accent}/10 flex items-center justify-center`}>
+                  <dept.icon className={`w-5 h-5 sm:w-6 sm:h-6 text-${dept.accent}`} />
+                </div>
+
+                {/* Content */}
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-foreground mb-1.5">{dept.title}</h3>
+                  <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">{dept.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Team contact note */}
+        <motion.div
+          initial="hidden"
+          animate={teamInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          className="mt-8 sm:mt-10 text-center"
+        >
+          <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+            Want to join the team or talk to us about a role? Reach us directly.
+          </p>
+          <a
+            href={siteConfig.contact.phone2Href}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-foreground/80 hover:text-[#F5A623] border border-border hover:border-[#F5A623]/40 hover:bg-[#F5A623]/5 transition-all duration-300"
+          >
+            <Phone className="w-4 h-4" />
+            <span className="text-sm font-semibold">+91 8073568735</span>
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     1.75. COMMUNITY & NETWORK
+     ═══════════════════════════════════════════════════════ */
+
+  const renderCommunity = () => (
+    <section ref={communityRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden section-glow">
+      <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={communityInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <Network className="w-3.5 h-3.5 text-biz-teal" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">The Ecosystem</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">
+            Our Community & <span className="gradient-text-teal">Network</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Beyond the core team, BizMeals is powered by an extended ecosystem — our freelancer team works with us, partner companies work with us, and together we deliver growth across any industry.
+          </motion.p>
+        </motion.div>
+
+        {/* Stats grid */}
+        <motion.div
+          initial="hidden"
+          animate={communityInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5"
+        >
+          {communityStats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              variants={fadeUp}
+              custom={i}
+              className="group glass-card rounded-2xl p-6 sm:p-7 card-hover relative overflow-hidden"
+            >
+              {/* Hover glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(280px circle at 50% 50%, ${
+                    stat.accent === 'biz-purple'
+                      ? 'rgba(15,37,87,0.08)'
+                      : stat.accent === 'biz-teal'
+                        ? 'rgba(30,58,138,0.08)'
+                        : 'rgba(245,166,35,0.08)'
+                  }, transparent 60%)`,
+                }}
+              />
+
+              <div className="relative z-10 text-center">
+                {/* Icon */}
+                <div className={`w-12 h-12 rounded-xl bg-${stat.accent}/10 flex items-center justify-center mx-auto mb-4`}>
+                  <stat.icon className={`w-6 h-6 text-${stat.accent}`} />
+                </div>
+
+                {/* Value */}
+                <div className={`text-3xl sm:text-4xl font-bold mb-1 text-${stat.accent}`}>
+                  {stat.value}
+                </div>
+
+                {/* Label */}
+                <h3 className="text-sm sm:text-base font-bold text-foreground mb-3">
+                  {stat.label}
+                </h3>
+
+                {/* Description */}
+                <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
+                  {stat.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Bottom note */}
+        <motion.p
+          initial="hidden"
+          animate={communityInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          className="text-center text-xs sm:text-sm text-muted-foreground mt-8 sm:mt-10 max-w-2xl mx-auto leading-relaxed"
+        >
+          Our freelancer team works with us, and partner companies work with us — together we deliver{' '}
+          <span className="text-foreground font-semibold">360° growth across any industry.</span>
+        </motion.p>
+      </div>
     </section>
   )
 
@@ -254,7 +651,7 @@ export default function FounderPage() {
             </motion.div>
 
             <motion.p variants={fadeUp} className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
-              Manjunatha Reddy Polaka started his career in <span className="text-foreground font-semibold">digital marketing in 2019</span>, learning the craft of growth, leads, and online brand-building from the ground up. Driven by an entrepreneurial itch, he soon stepped into building his own <span className="text-foreground font-semibold">startup and business ventures</span> — testing, failing, and learning what actually makes a business work. Those lessons became BizMeals: a Business Growth Execution Partner that helps other business owners grow with the same hands-on, execution-first approach. Today he is building a successful business, helping other business owners do the same, and working towards a clear goal — <span className="text-foreground font-semibold">becoming one of India&apos;s top entrepreneurs in the next 10 years.</span>
+              Manjunatha Reddy Polaka started his career in <span className="text-foreground font-semibold">digital marketing in 2019</span>, learning the craft of growth, leads, and online brand-building from the ground up. Driven by an entrepreneurial itch, he soon stepped into building his own <span className="text-foreground font-semibold">startup and business ventures</span> — testing, failing, and learning what actually makes a business work. Those lessons became BizMeals: a Business Growth Execution Partner that helps other business owners grow with the same hands-on, execution-first approach. Today he is building a successful business, helping other business owners do the same, and working towards a clear goal — <span className="text-foreground font-semibold">becoming one of India&apos;s top entrepreneurs in the next 10 years.</span> Today, Manjunatha and co-founder <span className="text-foreground font-semibold">Durga Prasad</span> are building BizMeals with a network of <span className="text-foreground font-semibold">{siteConfig.community.freelancers}+ freelancers</span> and <span className="text-foreground font-semibold">{siteConfig.community.founders}+ founders and business owners</span> across industries.
             </motion.p>
           </div>
         </motion.div>
@@ -530,7 +927,7 @@ export default function FounderPage() {
           Ready to transform your business with hands-on execution and proven strategies? Let&apos;s start the conversation.
         </motion.p>
 
-        <motion.div variants={fadeUp}>
+        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Button
             onClick={() => setCurrentPage('contact')}
             className="gradient-purple glow-purple text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base rounded-xl h-auto shadow-lg hover:shadow-xl hover:shadow-biz-purple/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
@@ -539,6 +936,15 @@ export default function FounderPage() {
             Work With Me
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>
+          <a
+            href={siteConfig.linkedin.company}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base rounded-xl font-semibold text-foreground/80 hover:text-[#F5A623] border border-border hover:border-[#F5A623]/40 hover:bg-[#F5A623]/5 transition-all duration-300"
+          >
+            <Linkedin className="w-5 h-5" />
+            Follow BizMeals on LinkedIn
+          </a>
         </motion.div>
       </motion.div>
     </section>
@@ -551,6 +957,9 @@ export default function FounderPage() {
   return (
     <>
       {renderHero()}
+      {renderLeadership()}
+      {renderTeam()}
+      {renderCommunity()}
       {renderBio()}
       {renderSkills()}
       {renderTimeline()}
