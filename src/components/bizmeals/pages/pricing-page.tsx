@@ -16,6 +16,19 @@ import {
   Zap,
   Home,
   ChevronRight,
+  Rocket,
+  Building2,
+  HandshakeIcon,
+  TrendingUp,
+  Wallet,
+  Percent,
+  Layers,
+  Target,
+  Briefcase,
+  Users,
+  LineChart,
+  Phone,
+  MessageCircle,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePage } from '@/components/bizmeals/page-context'
@@ -47,7 +60,103 @@ const staggerContainer = {
   },
 }
 
-/* ───────────────────────── data ───────────────────────── */
+/* ════════════════════════════════════════════════════════════════════════
+   DATA — ENGAGEMENT MODELS (the heart of the page)
+   We don't just sell packages. We sell ways of working together.
+   ════════════════════════════════════════════════════════════════════════ */
+
+interface EngagementModel {
+  icon: React.ElementType
+  name: string
+  tagline: string
+  priceHint: string
+  bestFor: string
+  howItWorks: string
+  features: string[]
+  accent: string
+  glowColor: string
+  isFlagship?: boolean
+}
+
+const engagementModels: EngagementModel[] = [
+  {
+    icon: Briefcase,
+    name: 'Project-Based',
+    tagline: 'Fixed scope. Fixed price. Clear deliverables.',
+    priceHint: 'From ₹25,000 / project',
+    bestFor: 'One-off builds — websites, campaigns, audits, launches',
+    howItWorks:
+      'You define the outcome, we scope it, quote a fixed price, and deliver on a timeline. No surprises, no hourly billing.',
+    features: [
+      'Clear scope & milestone-based delivery',
+      'Fixed price agreed upfront',
+      '50% advance, 50% on delivery',
+      'Great for websites, launches & campaigns',
+      'Optional handover & training',
+    ],
+    accent: 'biz-teal',
+    glowColor: 'rgba(20,184,166,0.12)',
+  },
+  {
+    icon: Layers,
+    name: 'Monthly Retainer',
+    tagline: 'Ongoing growth engine. Cancel anytime.',
+    priceHint: '₹25k – ₹1.2L / month',
+    bestFor: 'Businesses that need continuous marketing & execution',
+    howItWorks:
+      'A dedicated team runs your growth month after month — strategy, execution, reporting, the works. Scale the plan up or down as you grow.',
+    features: [
+      'Dedicated team & account manager',
+      'Strategy + execution under one roof',
+      'Monthly reporting & strategy calls',
+      'Monthly or quarterly billing (save 20%)',
+      'Flexible — upgrade / pause / cancel',
+    ],
+    accent: 'biz-purple',
+    glowColor: 'rgba(139,92,246,0.12)',
+    isFlagship: true,
+  },
+  {
+    icon: Percent,
+    name: 'Equity & Partnership',
+    tagline: 'Skin in the game. We grow when you grow.',
+    priceHint: 'Equity / revenue share',
+    bestFor: 'Startups & founders with big vision, limited cash',
+    howItWorks:
+      'For founders we believe in, we trade part of our fee for equity or a revenue share. We become your growth co-pilot — invested in your long-term success, not just a monthly invoice.',
+    features: [
+      'Reduced or zero monthly fee in exchange for equity',
+      'Revenue-share options for funded startups',
+      'Long-term strategic partnership',
+      'Founder-level commitment from our team',
+      'Ideal for pre-Series A & bootstrapped startups',
+    ],
+    accent: 'biz-amber',
+    glowColor: 'rgba(245,158,11,0.12)',
+  },
+  {
+    icon: HandshakeIcon,
+    name: 'Hybrid Engagement',
+    tagline: 'Fee + equity. Aligned incentives.',
+    priceHint: 'Custom — fee + small equity',
+    bestFor: 'Startups & SMBs who want commitment + flexibility',
+    howItWorks:
+      'Pay a reduced monthly fee plus a small equity stake or performance bonus. You keep cash flow healthy, we stay deeply invested in your outcomes.',
+    features: [
+      'Reduced retainer + small equity / bonus',
+      'Performance-linked milestones',
+      'Budget-friendly for early-stage teams',
+      'Aligned long-term incentives',
+      'Tailored to your stage & runway',
+    ],
+    accent: 'biz-cyan',
+    glowColor: 'rgba(30,58,138,0.12)',
+  },
+]
+
+/* ════════════════════════════════════════════════════════════════════════
+   DATA — RETAINER PRICING TIERS (direct pricing, for SMBs & enterprises)
+   ════════════════════════════════════════════════════════════════════════ */
 
 interface PricingTier {
   name: string
@@ -69,14 +178,15 @@ const pricingTiers: PricingTier[] = [
     tagline: 'For Early-Stage Ventures',
     monthlyPrice: '₹25,000',
     quarterlyPrice: '₹20,000',
-    bestFor: 'Startups and small businesses getting started',
+    bestFor: 'Small businesses & solo founders finding their feet',
     features: [
       { text: 'Social Media Management (2 platforms)', included: true },
-      { text: 'Basic SEO Setup', included: true },
-      { text: 'Google Ads Management (up to ₹50K spend)', included: true },
+      { text: 'Basic SEO & Content Marketing', included: true },
+      { text: 'Google & Meta Ads Management (up to ₹50K spend)', included: true },
       { text: 'Monthly Performance Report', included: true },
-      { text: 'Email Support', included: true },
-      { text: 'BPO Services', included: false },
+      { text: 'Website Development (1-page)', included: true },
+      { text: 'Email & WhatsApp Support', included: true },
+      { text: 'BPO Support', included: false },
       { text: 'Event Management', included: false },
       { text: 'Dedicated Account Manager', included: false },
     ],
@@ -132,6 +242,72 @@ const pricingTiers: PricingTier[] = [
   },
 ]
 
+/* ════════════════════════════════════════════════════════════════════════
+   DATA — WHO WE WORK WITH (audience matcher: pricing differs by client)
+   ════════════════════════════════════════════════════════════════════════ */
+
+interface AudienceCard {
+  icon: React.ElementType
+  audience: string
+  who: string
+  recommendedModel: string
+  priceRange: string
+  whatYouGet: string
+  accent: string
+  glowColor: string
+}
+
+const audiences: AudienceCard[] = [
+  {
+    icon: Rocket,
+    audience: 'Startups & Founders',
+    who: 'Pre-Series A, bootstrapped, or early-stage teams building something new.',
+    recommendedModel: 'Equity / Partnership or Hybrid',
+    priceRange: 'Reduced fee + equity, or revenue share',
+    whatYouGet:
+      'Founder-level commitment, product-market-fit sprints, growth builds, investor-ready metrics, and a partner who wins only when you do.',
+    accent: 'biz-amber',
+    glowColor: 'rgba(245,158,11,0.10)',
+  },
+  {
+    icon: Building2,
+    audience: 'Small & Medium Businesses',
+    who: 'Local businesses, D2C brands, service companies, and family-run enterprises.',
+    recommendedModel: 'Monthly Retainer or Project-Based',
+    priceRange: '₹25,000 – ₹1,20,000 / month',
+    whatYouGet:
+      'A full growth team at a fraction of an agency hire — marketing, ads, content, websites, and BPO, all under one roof and one predictable invoice.',
+    accent: 'biz-teal',
+    glowColor: 'rgba(20,184,166,0.10)',
+  },
+  {
+    icon: Briefcase,
+    audience: 'Enterprises & Big Companies',
+    who: 'Established brands, mid-to-large companies, and funded scale-ups.',
+    recommendedModel: 'Enterprise Retainer or Strategic Partnership',
+    priceRange: '₹1,20,000+ / month or custom',
+    whatYouGet:
+      'Dedicated pods, senior strategists, unlimited ad-spend management, real-time dashboards, BPO teams, and weekly executive-level strategy sessions.',
+    accent: 'biz-violet',
+    glowColor: 'rgba(139,92,246,0.10)',
+  },
+  {
+    icon: Target,
+    audience: 'Project Clients',
+    who: 'Anyone with a specific build in mind — a website, a launch, an audit, a campaign.',
+    recommendedModel: 'Project-Based (fixed scope)',
+    priceRange: 'From ₹25,000 / project',
+    whatYouGet:
+      'A clear scope, a fixed price, and on-time delivery. Perfect when you need one thing done right without committing to a monthly plan.',
+    accent: 'biz-cyan',
+    glowColor: 'rgba(30,58,138,0.10)',
+  },
+]
+
+/* ════════════════════════════════════════════════════════════════════════
+   DATA — STRATEGIC ADD-ONS (indirect services & consultancy)
+   ════════════════════════════════════════════════════════════════════════ */
+
 interface AddOn {
   icon: React.ElementType
   name: string
@@ -142,34 +318,58 @@ interface AddOn {
 
 const addOns: AddOn[] = [
   {
-    icon: Headphones,
-    name: 'BPO Support',
-    price: 'Starting ₹15,000/mo',
-    description: 'Dedicated support team for customer service, data entry & back-office operations.',
+    icon: Lightbulb,
+    name: 'Strategy & Consultancy',
+    price: 'From ₹5,000 / session',
+    description:
+      '1-on-1 sessions with senior strategists — growth frameworks, go-to-market, positioning, and process optimisation.',
+    accent: 'biz-amber',
+  },
+  {
+    icon: Rocket,
+    name: 'Startup Building',
+    price: 'Custom (fee + equity)',
+    description:
+      'End-to-end startup support — from idea validation and MVP to first 10 paying customers and investor pitch prep.',
+    accent: 'biz-purple',
+  },
+  {
+    icon: LineChart,
+    name: 'Investment Strategy Advisory',
+    price: 'From ₹15,000 / month',
+    description:
+      'Fundraising readiness, pitch deck reviews, investor connects, financial modelling, and valuation guidance.',
     accent: 'biz-teal',
+  },
+  {
+    icon: Headphones,
+    name: 'BPO & Back-Office',
+    price: 'From ₹15,000 / month',
+    description:
+      'Dedicated support team for customer service, data entry, lead qualification, and back-office operations.',
+    accent: 'biz-cyan',
   },
   {
     icon: PartyPopper,
     name: 'Event Management',
-    price: 'Starting ₹50,000/event',
-    description: 'End-to-end event planning, coordination & execution for corporate & brand events.',
+    price: 'From ₹50,000 / event',
+    description:
+      'End-to-end event planning, coordination & execution for corporate, brand, and product-launch events.',
     accent: 'biz-orange',
   },
   {
-    icon: Lightbulb,
-    name: 'Consultancy Session',
-    price: 'Starting ₹5,000/session',
-    description: 'Expert one-on-one sessions covering strategy, growth frameworks & process optimization.',
-    accent: 'biz-amber',
-  },
-  {
     icon: Package,
-    name: 'Custom Package',
-    price: "Let's Talk",
-    description: 'Bespoke solutions tailored to your unique business needs and growth objectives.',
+    name: 'Custom Build / Scope',
+    price: "Let's talk",
+    description:
+      'Bespoke solutions tailored to your unique business — end-to-end business builds, integrations, and special projects.',
     accent: 'biz-violet',
   },
 ]
+
+/* ════════════════════════════════════════════════════════════════════════
+   DATA — FAQ (rewritten around collaboration, equity, budgets)
+   ════════════════════════════════════════════════════════════════════════ */
 
 interface FAQItem {
   question: string
@@ -178,40 +378,50 @@ interface FAQItem {
 
 const faqItems: FAQItem[] = [
   {
-    question: "What's included in the free growth plan?",
+    question: 'Do you really work on equity or partnership instead of cash?',
     answer:
-      'A comprehensive analysis of your current marketing, operations, and growth potential with a custom roadmap.',
+      'Yes — for startups and founders we genuinely believe in, we trade part (or all) of our fee for equity or a revenue share. We become a long-term growth partner, not just a vendor. This is decided case-by-case after an initial conversation about your stage, vision, and runway.',
   },
   {
-    question: 'Can I switch plans anytime?',
+    question: 'What if I have a limited budget — can we still work together?',
     answer:
-      'Yes, you can upgrade or downgrade your plan at any time. Changes take effect from the next billing cycle.',
+      'Absolutely. We work with your budget. The Hybrid model lets you combine a reduced monthly fee with a small equity stake or performance bonus, keeping your cash flow healthy while keeping us deeply invested in your outcomes. Tell us your budget and we will design a plan around it.',
   },
   {
-    question: 'Is there a minimum commitment?',
+    question: 'What is the difference between Project-Based and Retainer?',
     answer:
-      'Monthly plans have no minimum commitment. Quarterly plans are billed upfront with a 3-month commitment.',
+      'Project-Based is a one-off engagement with a fixed scope and fixed price (a website, a launch, an audit). A Retainer is an ongoing monthly partnership where we run your growth continuously — strategy, execution, and reporting — and you can pause, upgrade, or cancel anytime.',
   },
   {
-    question: 'Do you work with businesses outside India?',
+    question: 'Can you build my startup end-to-end?',
     answer:
-      "Yes! While we're based in Bangalore, we serve clients globally through our digital-first approach.",
+      'Yes. Our Startup Building add-on covers everything from idea validation and MVP to acquiring your first 10 paying customers and preparing for investors. For early-stage founders, this is often structured as fee + equity so incentives stay aligned.',
   },
   {
-    question: 'What makes BizMeals different from agencies?',
+    question: 'Do you help with fundraising and investment strategy?',
     answer:
-      "We don't just create strategies — we execute them. Our team becomes an extension of yours, delivering measurable results.",
+      'Yes. Our Investment Strategy Advisory covers fundraising readiness, pitch-deck reviews, investor connects, financial modelling, and valuation guidance. We have a network of 500+ founders and business owners across industries.',
   },
   {
-    question: 'How quickly can I expect results?',
+    question: 'Is there a minimum commitment or contract lock-in?',
     answer:
-      'Most clients see initial results within 30 days and significant growth within 90 days of engagement.',
+      'Monthly retainers have no lock-in — cancel anytime. Quarterly plans are billed upfront with a 3-month commitment (and save you 20%). Project-Based engagements are scoped per project. Equity / Partnership engagements are longer-term by nature and structured around milestones.',
+  },
+  {
+    question: 'How do you price differently for startups vs enterprises?',
+    answer:
+      'Startups often work with us on equity, revenue share, or a reduced hybrid fee. SMBs typically choose a Starter or Growth retainer (₹25k–₹55k/month). Enterprises choose the Enterprise retainer (₹1.2L+/month) or a custom strategic partnership. The model flexes to your stage, size, and ambition.',
+  },
+  {
+    question: 'What is included in the free growth plan?',
+    answer:
+      'A comprehensive analysis of your current marketing, operations, and growth potential, plus a custom roadmap. It is free, no-obligation, and the fastest way to figure out which engagement model fits you best.',
   },
 ]
 
-/* ═════════════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════════════════
    PRICING PAGE COMPONENT
-   ═════════════════════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════════════════ */
 
 export default function PricingPage() {
   const { setCurrentPage } = usePage()
@@ -222,11 +432,20 @@ export default function PricingPage() {
   const heroRef = useRef<HTMLDivElement>(null)
   const heroInView = useInView(heroRef, { once: true, margin: '-80px' })
 
+  const modelsRef = useRef<HTMLDivElement>(null)
+  const modelsInView = useInView(modelsRef, { once: true, margin: '-80px' })
+
   const tiersRef = useRef<HTMLDivElement>(null)
   const tiersInView = useInView(tiersRef, { once: true, margin: '-80px' })
 
+  const audienceRef = useRef<HTMLDivElement>(null)
+  const audienceInView = useInView(audienceRef, { once: true, margin: '-80px' })
+
   const addonsRef = useRef<HTMLDivElement>(null)
   const addonsInView = useInView(addonsRef, { once: true, margin: '-80px' })
+
+  const budgetRef = useRef<HTMLDivElement>(null)
+  const budgetInView = useInView(budgetRef, { once: true, margin: '-80px' })
 
   const faqRef = useRef<HTMLDivElement>(null)
   const faqInView = useInView(faqRef, { once: true, margin: '-80px' })
@@ -238,7 +457,7 @@ export default function PricingPage() {
   const ctaInView = useInView(ctaRef, { once: true, margin: '-80px' })
 
   /* ═══════════════════════════════════════════════════════
-     1. PAGE HERO
+     1. PAGE HERO — reframed around "ways to work with us"
      ═══════════════════════════════════════════════════════ */
 
   const renderHero = () => (
@@ -271,15 +490,15 @@ export default function PricingPage() {
             Home
           </button>
           <ChevronRight className="w-3 h-3 text-white/40" />
-          <span className="text-white font-medium">Pricing</span>
+          <span className="text-white font-medium">Pricing & Partnerships</span>
         </motion.div>
 
         {/* Badge */}
         <motion.div variants={fadeUp} className="float-animation mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-white/10 border border-white/20">
-            <Zap className="w-4 h-4 text-[#F5A623]" />
+            <HandshakeIcon className="w-4 h-4 text-[#F5A623]" />
             <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-white">
-              PRICING
+              Ways to Work With Us
             </span>
           </div>
         </motion.div>
@@ -289,8 +508,8 @@ export default function PricingPage() {
           variants={fadeUp}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-4 sm:mb-6"
         >
-          <span className="block text-white">Transparent Pricing,</span>
-          <span className="block text-[#F5A623] mt-1.5">Real Results</span>
+          <span className="block text-white">Not Just Pricing.</span>
+          <span className="block text-[#F5A623] mt-1.5">Partnerships That Fit.</span>
         </motion.h1>
 
         {/* Subtext */}
@@ -298,14 +517,134 @@ export default function PricingPage() {
           variants={fadeUp}
           className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl"
         >
-          No hidden fees. No vanity metrics. Just growth.
+          Fixed projects, monthly retainers, equity-based partnerships, or hybrid deals — we work the way your business needs. We build end-to-end, we invest in founders, and we flex to your budget.
         </motion.p>
       </motion.div>
     </section>
   )
 
   /* ═══════════════════════════════════════════════════════
-     2. PRICING TOGGLE
+     2. ENGAGEMENT MODELS — the core collaboration section
+     ═══════════════════════════════════════════════════════ */
+
+  const renderEngagementModels = () => (
+    <section ref={modelsRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden section-glow">
+      <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
+      <div className="absolute inset-0 dot-pattern pointer-events-none opacity-20" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={modelsInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <Layers className="w-3.5 h-3.5 text-biz-purple" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Collaboration Models</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+            Four Ways to <span className="gradient-text">Work With Us</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Some clients pay cash. Some give equity. Some do both. Pick the model that matches your stage — or talk to us and we will design a custom one.
+          </motion.p>
+        </motion.div>
+
+        {/* Model cards */}
+        <motion.div
+          initial="hidden"
+          animate={modelsInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch"
+        >
+          {engagementModels.map((model, i) => (
+            <motion.div
+              key={model.name}
+              variants={scaleIn}
+              custom={i}
+              className={`relative group glass-card rounded-2xl p-6 sm:p-8 card-hover overflow-hidden ${
+                model.isFlagship ? 'border border-[#F5A623]/30' : 'border border-border/50'
+              }`}
+            >
+              {/* Hover glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(320px circle at 50% 0%, ${model.glowColor}, transparent 60%)` }}
+              />
+
+              {/* Flagship badge */}
+              {model.isFlagship && (
+                <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
+                  <div className="gradient-purple text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full tracking-wide shadow-lg">
+                    MOST CHOSEN
+                  </div>
+                </div>
+              )}
+
+              <div className="relative z-10">
+                {/* Icon + name */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`shrink-0 w-12 h-12 rounded-xl bg-${model.accent}/10 flex items-center justify-center`}>
+                    <model.icon className={`w-6 h-6 text-${model.accent}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">{model.name}</h3>
+                    <p className="text-[11px] sm:text-xs text-muted-foreground">{model.priceHint}</p>
+                  </div>
+                </div>
+
+                {/* Tagline */}
+                <p className={`text-xs sm:text-sm font-semibold mb-3 text-${model.accent}`}>{model.tagline}</p>
+
+                {/* How it works */}
+                <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed mb-4">
+                  {model.howItWorks}
+                </p>
+
+                {/* Best for */}
+                <div className="glass-card rounded-lg px-3 py-2 mb-4 inline-flex items-center gap-2">
+                  <Sparkles className={`w-3.5 h-3.5 text-${model.accent}`} />
+                  <span className="text-[11px] sm:text-xs font-medium text-muted-foreground">{model.bestFor}</span>
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-2.5 mb-6">
+                  {model.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-2.5">
+                      <div className={`shrink-0 w-4 h-4 rounded-full bg-${model.accent}/15 flex items-center justify-center mt-0.5`}>
+                        <Check className={`w-2.5 h-2.5 text-${model.accent}`} />
+                      </div>
+                      <span className="text-[11px] sm:text-xs text-foreground/85 leading-snug">{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-${model.accent} hover:opacity-90 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group/cta w-full justify-center`}
+                  style={{
+                    background: model.accent === 'biz-teal' ? 'linear-gradient(135deg,#1E3A8A,#0F2557)'
+                      : model.accent === 'biz-purple' ? 'linear-gradient(135deg,#0F2557,#1E3A8A)'
+                      : model.accent === 'biz-amber' ? 'linear-gradient(135deg,#F5A623,#f97316)'
+                      : 'linear-gradient(135deg,#1E3A8A,#0F2557)',
+                  }}
+                >
+                  Explore {model.name}
+                  <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     3. PRICING TOGGLE + RETAINER TIERS (direct pricing)
      ═══════════════════════════════════════════════════════ */
 
   const renderToggle = () => (
@@ -347,58 +686,6 @@ export default function PricingPage() {
         </span>
       </span>
     </div>
-  )
-
-  /* ═══════════════════════════════════════════════════════
-     3. PRICING TIERS
-     ═══════════════════════════════════════════════════════ */
-
-  const renderPricingTiers = () => (
-    <section ref={tiersRef} className="relative py-10 sm:py-16 px-4 sm:px-6 overflow-hidden section-glow">
-      <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
-      <div className="absolute inset-0 dot-pattern pointer-events-none opacity-20" />
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Toggle */}
-        {renderToggle()}
-
-        {/* Cards */}
-        <motion.div
-          initial="hidden"
-          animate={tiersInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch"
-        >
-          {pricingTiers.map((tier, i) => {
-            const isGrowth = tier.isPopular
-
-            return (
-              <motion.div
-                key={tier.name}
-                variants={scaleIn}
-                custom={i}
-                className={`relative group ${isGrowth ? 'lg:-mt-4 lg:mb-4' : ''}`}
-              >
-                {/* Animated border wrapper for Growth tier */}
-                {isGrowth ? (
-                  <div className="animated-border h-full">
-                    <div className="relative glass-card-strong rounded-2xl p-6 sm:p-8 h-full flex flex-col card-hover overflow-hidden transition-shadow duration-500">
-                      {renderTierCard(tier, isGrowth)}
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className={`glass-card rounded-2xl p-6 sm:p-8 h-full flex flex-col card-hover overflow-hidden border ${tier.borderClass} transition-all duration-500 ${tier.glowClass}`}
-                  >
-                    {renderTierCard(tier, false)}
-                  </div>
-                )}
-              </motion.div>
-            )
-          })}
-        </motion.div>
-      </div>
-    </section>
   )
 
   const renderTierCard = (tier: PricingTier, isGrowth: boolean) => {
@@ -518,86 +805,168 @@ export default function PricingPage() {
     )
   }
 
-  /* ═══════════════════════════════════════════════════════
-     4. SERVICE ADD-ONS
-     ═══════════════════════════════════════════════════════ */
-
-  const renderAddOns = () => (
-    <section ref={addonsRef} className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+  const renderPricingTiers = () => (
+    <section ref={tiersRef} className="relative py-10 sm:py-16 px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 mesh-gradient-services pointer-events-none" />
       <div className="absolute inset-0 dot-pattern pointer-events-none opacity-20" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div
           initial="hidden"
-          animate={addonsInView ? 'visible' : 'hidden'}
+          animate={tiersInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-8 sm:mb-10"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <Wallet className="w-3.5 h-3.5 text-biz-amber" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Retainer Pricing</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+            Monthly <span className="gradient-text">Retainer Plans</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            For businesses that want continuous growth. Pick a tier, scale up or down anytime — or ask us to build a custom plan around your budget.
+          </motion.p>
+        </motion.div>
+
+        {/* Toggle */}
+        {renderToggle()}
+
+        {/* Cards */}
+        <motion.div
+          initial="hidden"
+          animate={tiersInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch"
+        >
+          {pricingTiers.map((tier, i) => {
+            const isGrowth = tier.isPopular
+
+            return (
+              <motion.div
+                key={tier.name}
+                variants={scaleIn}
+                custom={i}
+                className={`relative group ${isGrowth ? 'lg:-mt-4 lg:mb-4' : ''}`}
+              >
+                {/* Animated border wrapper for Growth tier */}
+                {isGrowth ? (
+                  <div className="animated-border h-full">
+                    <div className="relative glass-card-strong rounded-2xl p-6 sm:p-8 h-full flex flex-col card-hover overflow-hidden transition-shadow duration-500">
+                      {renderTierCard(tier, isGrowth)}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={`glass-card rounded-2xl p-6 sm:p-8 h-full flex flex-col card-hover overflow-hidden border ${tier.borderClass} transition-all duration-500 ${tier.glowClass}`}
+                  >
+                    {renderTierCard(tier, false)}
+                  </div>
+                )}
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Equity note under tiers */}
+        <motion.p
+          initial="hidden"
+          animate={tiersInView ? 'visible' : 'hidden'}
+          variants={fadeUp}
+          className="text-center text-xs sm:text-sm text-muted-foreground mt-8 sm:mt-10 max-w-2xl mx-auto"
+        >
+          <span className="text-foreground font-semibold">Cash-tight startup?</span>{' '}
+          These prices are for the retainer model. Startups & founders can also work with us on{' '}
+          <span className="text-biz-amber font-semibold">equity, revenue share, or a hybrid deal</span> — scroll up to the collaboration models above.
+        </motion.p>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     4. WHO WE WORK WITH — audience matcher
+     ═══════════════════════════════════════════════════════ */
+
+  const renderAudience = () => (
+    <section ref={audienceRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden section-glow">
+      <div className="absolute inset-0 mesh-gradient-dark pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={audienceInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
           className="text-center mb-10 sm:mb-14"
         >
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
-            <Package className="w-3.5 h-3.5 text-biz-purple" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Add-Ons</span>
+            <Users className="w-3.5 h-3.5 text-biz-teal" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Who We Work With</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-            Service <span className="gradient-text">Add-Ons</span>
+            Built for Every <span className="gradient-text-teal">Stage & Size</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto">
-            Enhance any plan with these optional services. Mix and match to build your perfect growth stack.
+          <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            From bootstrapped founders to funded startups to established enterprises — the model and price flex to where you are.
           </motion.p>
         </motion.div>
 
-        {/* Add-on cards */}
+        {/* Audience cards */}
         <motion.div
           initial="hidden"
-          animate={addonsInView ? 'visible' : 'hidden'}
+          animate={audienceInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
           className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5"
         >
-          {addOns.map((addon, i) => (
+          {audiences.map((a, i) => (
             <motion.div
-              key={addon.name}
+              key={a.audience}
               variants={fadeUp}
               custom={i}
-              className="group glass-card rounded-2xl p-5 sm:p-6 card-hover flex items-start gap-4 sm:gap-5 overflow-hidden relative"
+              className="group glass-card rounded-2xl p-6 sm:p-7 card-hover relative overflow-hidden"
             >
               {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(300px circle at 50% 50%, ${
-                    addon.accent === 'biz-teal' ? 'rgba(20,184,166,0.08)' :
-                    addon.accent === 'biz-orange' ? 'rgba(249,115,22,0.08)' :
-                    addon.accent === 'biz-amber' ? 'rgba(245,158,11,0.08)' :
-                    'rgba(139,92,246,0.08)'
-                  }, transparent 60%)`,
-                }}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(300px circle at 50% 50%, ${a.glowColor}, transparent 60%)` }}
               />
 
-              <div className="relative z-10 flex items-start gap-4 sm:gap-5 w-full">
-                {/* Icon */}
-                <div className={`shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-${addon.accent}/10 flex items-center justify-center`}>
-                  <addon.icon className={`w-5 h-5 sm:w-6 sm:h-6 text-${addon.accent}`} />
+              <div className="relative z-10">
+                {/* Icon + audience */}
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`shrink-0 w-11 h-11 rounded-xl bg-${a.accent}/10 flex items-center justify-center`}>
+                    <a.icon className={`w-5 h-5 text-${a.accent}`} />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground">{a.audience}</h3>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-foreground text-sm sm:text-base">{addon.name}</h3>
-                    <span className={`text-xs sm:text-sm font-semibold text-${addon.accent} whitespace-nowrap`}>
-                      {addon.price}
-                    </span>
+                {/* Who */}
+                <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed mb-4">{a.who}</p>
+
+                {/* Recommended model + price */}
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mt-0.5 w-16 shrink-0">Model</span>
+                    <span className={`text-xs font-semibold text-${a.accent}`}>{a.recommendedModel}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3">
-                    {addon.description}
-                  </p>
-                  <button
-                    onClick={() => setCurrentPage('contact')}
-                    className={`inline-flex items-center gap-1 text-xs font-semibold text-${addon.accent} hover:opacity-80 transition-opacity duration-200 group/link`}
-                  >
-                    Add to Plan
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-200" />
-                  </button>
+                  <div className="flex items-start gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mt-0.5 w-16 shrink-0">Price</span>
+                    <span className="text-xs font-medium text-foreground/85">{a.priceRange}</span>
+                  </div>
                 </div>
+
+                {/* What you get */}
+                <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed mb-4">{a.whatYouGet}</p>
+
+                {/* CTA */}
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className={`inline-flex items-center gap-1.5 text-xs font-semibold text-${a.accent} hover:opacity-80 transition-opacity duration-200 group/link`}
+                >
+                  Talk to us about your stage
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-200" />
+                </button>
               </div>
             </motion.div>
           ))}
@@ -607,11 +976,177 @@ export default function PricingPage() {
   )
 
   /* ═══════════════════════════════════════════════════════
-     5. FAQ SECTION
+     5. STRATEGIC ADD-ONS (indirect services & consultancy)
+     ═══════════════════════════════════════════════════════ */
+
+  const renderAddOns = () => (
+    <section ref={addonsRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+      <div className="absolute inset-0 mesh-gradient-services pointer-events-none" />
+      <div className="absolute inset-0 dot-pattern pointer-events-none opacity-20" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial="hidden"
+          animate={addonsInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-10 sm:mb-14"
+        >
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+            <TrendingUp className="w-3.5 h-3.5 text-biz-purple" />
+            <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Indirect Services</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+            Strategic <span className="gradient-text">Add-Ons & Consultancy</span>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            Beyond direct marketing retainers — advisory, startup building, investment strategy, and back-office support. Add these to any plan or engage standalone.
+          </motion.p>
+        </motion.div>
+
+        {/* Add-on cards */}
+        <motion.div
+          initial="hidden"
+          animate={addonsInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+        >
+          {addOns.map((addon, i) => (
+            <motion.div
+              key={addon.name}
+              variants={fadeUp}
+              custom={i}
+              className="group glass-card rounded-2xl p-5 sm:p-6 card-hover overflow-hidden relative"
+            >
+              {/* Hover glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(300px circle at 50% 50%, ${
+                    addon.accent === 'biz-teal' ? 'rgba(20,184,166,0.08)' :
+                    addon.accent === 'biz-orange' ? 'rgba(249,115,22,0.08)' :
+                    addon.accent === 'biz-amber' ? 'rgba(245,158,11,0.08)' :
+                    addon.accent === 'biz-purple' ? 'rgba(139,92,246,0.08)' :
+                    addon.accent === 'biz-cyan' ? 'rgba(30,58,138,0.08)' :
+                    'rgba(139,92,246,0.08)'
+                  }, transparent 60%)`,
+                }}
+              />
+
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className={`shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-${addon.accent}/10 flex items-center justify-center mb-4`}>
+                  <addon.icon className={`w-5 h-5 sm:w-6 sm:h-6 text-${addon.accent}`} />
+                </div>
+
+                {/* Name + price */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="font-bold text-foreground text-sm sm:text-base">{addon.name}</h3>
+                </div>
+                <span className={`inline-block text-xs sm:text-sm font-semibold text-${addon.accent} mb-3`}>
+                  {addon.price}
+                </span>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4">
+                  {addon.description}
+                </p>
+
+                {/* CTA */}
+                <button
+                  onClick={() => setCurrentPage('contact')}
+                  className={`inline-flex items-center gap-1 text-xs font-semibold text-${addon.accent} hover:opacity-80 transition-opacity duration-200 group/link`}
+                >
+                  Add to Plan
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-200" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     6. BUDGET & ENGAGEMENT FLEXIBILITY
+     ═══════════════════════════════════════════════════════ */
+
+  const renderBudgetFlex = () => (
+    <section ref={budgetRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden section-glow">
+      <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate={budgetInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="glass-card-strong rounded-2xl p-6 sm:p-10 relative overflow-hidden"
+        >
+          {/* Glow accents */}
+          <div className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-biz-purple/10 blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-biz-teal/10 blur-3xl pointer-events-none" />
+
+          <div className="relative z-10">
+            {/* Header */}
+            <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10">
+              <motion.div className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-4 sm:mb-6">
+                <Wallet className="w-3.5 h-3.5 text-biz-amber" />
+                <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Budget Flexibility</span>
+              </motion.div>
+              <motion.h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+                We Work With <span className="gradient-text">Your Budget</span>
+              </motion.h2>
+              <motion.p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                No two businesses are the same — and neither are our engagements. Here is how we keep working together flexible, fair, and outcome-aligned.
+              </motion.p>
+            </motion.div>
+
+            {/* Flex points */}
+            <motion.div
+              variants={staggerContainer}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5"
+            >
+              {[
+                { icon: HandshakeIcon, title: 'We work together', text: 'You are not buying a package — you are partnering with a team. We co-design scope, milestones, and pricing around what actually moves your business.', accent: 'biz-purple' },
+                { icon: Wallet, title: 'Budget-aligned', text: 'Tell us your budget. We will design the most impactful engagement within it — and tell you honestly what is and is not possible for that number.', accent: 'biz-amber' },
+                { icon: Layers, title: 'End-to-end builds', text: 'From idea to launch to scale — strategy, product, marketing, ops, and fundraising under one roof. One partner, every lever, full accountability.', accent: 'biz-teal' },
+                { icon: Percent, title: 'Equity & partnership', text: 'For founders we believe in, we trade fee for equity or revenue share. Aligned incentives mean we only win when you do.', accent: 'biz-cyan' },
+              ].map((item, i) => (
+                <motion.div key={item.title} variants={fadeUp} custom={i} className="flex items-start gap-4">
+                  <div className={`shrink-0 w-11 h-11 rounded-xl bg-${item.accent}/10 flex items-center justify-center`}>
+                    <item.icon className={`w-5 h-5 text-${item.accent}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-foreground mb-1.5">{item.title}</h3>
+                    <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">{item.text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div variants={fadeUp} className="text-center mt-8 sm:mt-10">
+              <button
+                onClick={() => setCurrentPage('contact')}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white gradient-purple glow-purple hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group"
+              >
+                <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                Get a Custom Quote
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+
+  /* ═══════════════════════════════════════════════════════
+     7. FAQ SECTION (rewritten)
      ═══════════════════════════════════════════════════════ */
 
   const renderFAQ = () => (
-    <section ref={faqRef} className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden section-glow">
+    <section ref={faqRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 mesh-gradient-dark pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto">
@@ -627,7 +1162,7 @@ export default function PricingPage() {
             <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">FAQ</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            Frequently Asked <span className="gradient-text">Questions</span>
+            Pricing & Partnership <span className="gradient-text">Questions</span>
           </motion.h2>
         </motion.div>
 
@@ -688,11 +1223,11 @@ export default function PricingPage() {
   )
 
   /* ═══════════════════════════════════════════════════════
-     6. MONEY-BACK GUARANTEE
+     8. MONEY-BACK GUARANTEE
      ═══════════════════════════════════════════════════════ */
 
   const renderGuarantee = () => (
-    <section ref={guaranteeRef} className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+    <section ref={guaranteeRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
 
       <motion.div
@@ -723,7 +1258,7 @@ export default function PricingPage() {
             </h3>
 
             <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8">
-              If you don&apos;t see measurable progress in the first 30 days, we&apos;ll work for free until you do.
+              If you don&apos;t see measurable progress in the first 30 days, we&apos;ll work for free until you do. Equity & partnership engagements carry the same commitment — we only win when you do.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-muted-foreground/60">
@@ -747,11 +1282,11 @@ export default function PricingPage() {
   )
 
   /* ═══════════════════════════════════════════════════════
-     7. CTA SECTION
+     9. CTA SECTION (with contact buttons)
      ═══════════════════════════════════════════════════════ */
 
   const renderCTA = () => (
-    <section ref={ctaRef} className="relative py-16 sm:py-24 px-4 sm:px-6 overflow-hidden section-glow">
+    <section ref={ctaRef} className="relative py-12 sm:py-20 px-4 sm:px-6 overflow-hidden section-glow">
       {/* Background */}
       <div className="absolute inset-0 mesh-gradient-hero pointer-events-none" />
       <div className="absolute inset-0 dot-pattern pointer-events-none opacity-20" />
@@ -767,22 +1302,23 @@ export default function PricingPage() {
         className="relative z-10 max-w-3xl mx-auto text-center"
       >
         <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass-card px-4 py-1.5 rounded-full mb-6 sm:mb-8">
-          <Sparkles className="w-3.5 h-3.5 text-biz-purple" />
+          <HandshakeIcon className="w-3.5 h-3.5 text-biz-purple" />
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-            Let&apos;s Talk Growth
+            Let&apos;s Build Together
           </span>
         </motion.div>
 
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-          Ready to Invest<br />
-          <span className="gradient-text">in Growth?</span>
+          Not Sure Which Model<br />
+          <span className="gradient-text">Fits You?</span>
         </motion.h2>
 
         <motion.p variants={fadeUp} className="text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed">
-          Get a free, no-obligation growth plan tailored to your business. Our experts will analyze your current position and map a clear path to scale.
+          Tell us your stage, your budget, and your goal. We will recommend the right engagement — retainer, project, equity, or hybrid — in a free, no-obligation call.
         </motion.p>
 
-        <motion.div variants={fadeUp}>
+        {/* Contact buttons */}
+        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-4">
           <Button
             onClick={() => setCurrentPage('contact')}
             className="gradient-purple glow-purple text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base rounded-xl h-auto shadow-lg hover:shadow-xl hover:shadow-biz-purple/25 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] group"
@@ -791,10 +1327,38 @@ export default function PricingPage() {
             Get Your Free Growth Plan
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>
+          <a
+            href="https://wa.me/918217330484"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base rounded-xl font-semibold border border-green-500/30 text-green-500 hover:bg-green-500/10 hover:border-green-500/50 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+          >
+            <MessageCircle className="w-5 h-5" />
+            WhatsApp Us
+          </a>
+        </motion.div>
+
+        {/* Quick call links */}
+        <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10">
+          <a
+            href="tel:+918217330484"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-biz-teal transition-colors duration-200"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            +91 8217330484
+          </a>
+          <span className="text-muted-foreground/20">•</span>
+          <a
+            href="tel:+918073568735"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-biz-amber transition-colors duration-200"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            +91 8073568735
+          </a>
         </motion.div>
 
         {/* Trust signal */}
-        <motion.div variants={fadeUp} className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-muted-foreground/50">
+        <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-muted-foreground/50">
           <div className="flex items-center gap-1.5">
             <Check className="w-3.5 h-3.5 text-biz-emerald" />
             <span className="text-xs font-medium">No setup fees</span>
@@ -809,6 +1373,11 @@ export default function PricingPage() {
             <Check className="w-3.5 h-3.5 text-biz-emerald" />
             <span className="text-xs font-medium">30-day guarantee</span>
           </div>
+          <span className="text-muted-foreground/20">•</span>
+          <div className="flex items-center gap-1.5">
+            <Check className="w-3.5 h-3.5 text-biz-emerald" />
+            <span className="text-xs font-medium">Equity-friendly</span>
+          </div>
         </motion.div>
       </motion.div>
     </section>
@@ -821,8 +1390,11 @@ export default function PricingPage() {
   return (
     <>
       {renderHero()}
+      {renderEngagementModels()}
       {renderPricingTiers()}
+      {renderAudience()}
       {renderAddOns()}
+      {renderBudgetFlex()}
       {renderFAQ()}
       {renderGuarantee()}
       {renderCTA()}
