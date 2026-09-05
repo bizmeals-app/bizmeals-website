@@ -13,7 +13,8 @@ import {
   Sparkles,
   CheckCircle2,
   FlaskConical,
-  Soup,
+  Smartphone,
+  Download,
   Target,
   TrendingUp,
   IndianRupee,
@@ -69,73 +70,75 @@ interface PitchProject {
   borderColor: string
   statusColor: string
   statusBg: string
+  /** Optional downloadable pitch deck (e.g. uploaded .pptx). */
+  pitchDeckUrl?: string
+  pitchDeckLabel?: string
 }
 
 const projects: PitchProject[] = [
   {
-    id: 'soup-cafe',
-    icon: Soup,
-    title: 'Soup Cafe',
+    id: 'stayeg',
+    icon: Smartphone,
+    title: 'StayEG',
     tagline:
-      "India's first dedicated soup cafe chain — serving healthy, comforting, on-the-go soups that replace India's unhealthy snacking habit.",
-    category: 'F&B · QSR · Health',
+      'StayEG is an application currently in development — a pre-seed stage product built by the BizMeals team. Full details are in the pitch deck below.',
+    category: 'Software · Application',
     problem:
-      "India's urban snack culture is dominated by deep-fried, sugary, and heavy fast food. There is no dedicated, branded, healthy soup-on-the-go option — even though soup is universally loved, affordable to produce, and naturally healthy. The gap between 'canned soup' and 'restaurant soup' is completely unbranded.",
+      'Finding and booking quality stays online is fragmented, slow, and inconsistent across platforms. Travellers and hosts both lack a single trusted, application-first experience that makes the process simple and reliable.',
     solution:
-      'A quick-service soup cafe chain serving freshly-made, regionally-flavoured soups in a modern, takeaway-friendly format. Think of it as the "Chai point" for soup — consistent quality, 5-minute service, affordable pricing (₹79–₹149), and a menu that blends global favourites with Indian regional classics (Rasam, Dal Shorba, Tomato Shorba, Palak, sweet corn) plus international bowls.',
+      'StayEG is being built as a focused, application-first product that simplifies how stays are discovered, evaluated and booked — with a clean user experience for guests and a simple onboarding flow for hosts. The product is currently in development.',
     market:
-      "India's QSR market is projected to cross ₹70,000 Cr by 2027 (growing ~18% CAGR). The health-conscious urban consumer segment is 50M+ and expanding fast. Soup as a category is largely unorganised — no national brand exists. First-mover advantage is available right now.",
+      'The global online travel & accommodation market continues to grow rapidly, with mobile-first booking adoption accelerating across India and emerging markets. A focused, well-designed application can capture share in this expanding category.',
     businessModel:
-      'Company-owned flagship stores in tier-1 cities + a franchise model for tier-2/3 expansion. Revenue streams: dine-in & takeaway (60%), delivery via Zomato/Swiggy (30%), subscription (daily soup plans for offices & health-conscious individuals, 10%). Gross margins of 65–70% per bowl.',
+      'Application-based model with commission on bookings, host listings, and premium guest features. Exact unit economics are being validated during the build phase and detailed in the pitch deck.',
     roadmap: [
       {
-        phase: 'Phase 1 — Pilot Store',
-        timeline: 'Months 1–4',
+        phase: 'Phase 1 — Product Build',
+        timeline: 'In Progress',
         milestones: [
-          'Finalise recipes & SOPs (25-SKU menu)',
-          'Launch first flagship cafe in Bangalore',
-          'Build brand identity & supply chain',
-          'Validate unit economics (target ₹3L/month revenue)',
+          'Define product scope and core user flows',
+          'Design and build the application (in development)',
+          'Finalise the pre-seed pitch deck (available below)',
+          'Prepare for early user validation',
         ],
       },
       {
-        phase: 'Phase 2 — City Expansion',
-        timeline: 'Months 5–12',
+        phase: 'Phase 2 — Validation & Launch',
+        timeline: 'Next',
         milestones: [
-          'Open 4–5 stores across Bangalore',
-          'Launch delivery & subscription app',
-          'Central kitchen for the city',
-          'Build the core operating team',
+          'Onboard first hosts and listings',
+          'Run early-user validation and feedback loops',
+          'Refine product based on real usage',
+          'Prepare for seed fundraise',
         ],
       },
       {
-        phase: 'Phase 3 — Multi-City',
-        timeline: 'Year 2',
+        phase: 'Phase 3 — Growth',
+        timeline: 'Post-launch',
         milestones: [
-          'Enter 3 new tier-1 cities (Hyderabad, Pune, Chennai)',
-          'Open franchise model for tier-2 cities',
-          'Launch packaged soup retail line',
-          'Target 30+ stores nationwide',
+          'Expand listings and geographies',
+          'Build host and guest growth loops',
+          'Introduce premium features',
+          'Scale the team and operations',
         ],
       },
       {
-        phase: 'Phase 4 — National Brand',
-        timeline: 'Year 3–5',
+        phase: 'Phase 4 — Scale',
+        timeline: 'Long-term',
         milestones: [
-          '150+ stores across India',
-          'Series A/B fundraise',
-          'Explore own D2C packaged-soup brand',
-          'Position as "India\'s Soup Brand"',
+          'Establish StayEG as a trusted stays brand',
+          'Explore adjacent product lines',
+          'Series fundraise for national expansion',
         ],
       },
     ],
-    ask: 'Raising ₹40–60 Lakhs seed capital for the pilot store, brand build, and first 6 months of operations. Open to angel investors, F&B mentors, and strategic partners.',
+    ask: 'Raising pre-seed capital to complete the application build and run early user validation. Open to angel investors, product mentors, and strategic partners. Full details are in the StayEG Pre-Seed Pitch Deck.',
     partnerFit:
-      "Food & beverage operators, real-estate partners (high-footfall locations in Bangalore), supply-chain & sourcing partners, cloud-kitchen investors, and angel investors passionate about building India's first soup brand.",
-    status: 'Concept',
-    vision: 'To become India\'s first and largest dedicated soup cafe brand — making healthy, comforting soup a daily habit, not a seasonal afterthought.',
-    raiseTag: '₹40–60L Seed',
-    seekingTag: 'Investors & F&B Partners',
+      'Product builders, early-stage investors, and partners in the travel & stays ecosystem who want to get involved at the pre-seed stage of an application-first product.',
+    status: 'In Progress',
+    vision: 'To build a trusted, application-first product that makes discovering and booking stays simple, reliable and delightful.',
+    raiseTag: 'Pre-Seed',
+    seekingTag: 'Investors & Product Partners',
     featured: true,
     gradientFromTo: 'from-[#F5A623] to-[#D88A0E]',
     iconColor: 'text-[#F5A623]',
@@ -143,6 +146,8 @@ const projects: PitchProject[] = [
     borderColor: 'border-[#F5A623]/30',
     statusColor: 'text-[#F5A623]',
     statusBg: 'bg-[#F5A623]/10 border-[#F5A623]/30',
+    pitchDeckUrl: '/StayEG-PreSeed-PitchDeck.pptx',
+    pitchDeckLabel: 'StayEG Pre-Seed Pitch Deck',
   },
   {
     id: 'drone-delivery',
@@ -621,11 +626,12 @@ function ProjectCard({
 }
 
 
-/* ─── Featured Soup Cafe Hero Card ─── */
+/* ─── Featured StayEG Hero Card ─── */
 function FeaturedSoupCafe({ onOpen }: { onOpen: () => void }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const { setCurrentPage } = usePage()
+  const featured = projects[0]
 
   return (
     <motion.div
@@ -650,30 +656,30 @@ function FeaturedSoupCafe({ onOpen }: { onOpen: () => void }) {
               Featured Pitch
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-[#F5A623]/30 text-[#F5A623] text-[10px] font-bold uppercase tracking-wider">
-              <Soup className="w-3 h-3" />
-              F&B · QSR
+              <Smartphone className="w-3 h-3" />
+              Software · Application
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white text-[10px] font-bold uppercase tracking-wider">
-              Concept Stage
+              In Development
             </span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-[1.1] mb-3">
-            Soup Cafe — <span className="text-[#F5A623]">India&apos;s First Soup Cafe Brand</span>
+            StayEG — <span className="text-[#F5A623]">An Application in Development</span>
           </h3>
           <p className="text-sm sm:text-base text-white/75 leading-relaxed mb-5 max-w-xl">
-            A quick-service soup cafe chain serving freshly-made, regionally-flavoured soups that replace
-            India&apos;s unhealthy snacking habit. We&apos;re building the category that doesn&apos;t exist yet —
-            and we&apos;re looking for investors and partners to build it with us.
+            StayEG is a pre-seed stage application currently being built by the BizMeals team.
+            The product is in development — and we&apos;re sharing the full pre-seed pitch deck with
+            investors and partners who want to get involved early.
           </p>
 
           {/* Quick stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {[
-              { icon: Target, label: 'Market', value: '₹70K Cr QSR' },
-              { icon: TrendingUp, label: 'Growth', value: '18% CAGR' },
-              { icon: IndianRupee, label: 'Ticket', value: '₹79–149' },
-              { icon: MapPin, label: 'Pilot', value: 'Bangalore' },
+              { icon: Smartphone, label: 'Type', value: 'Application' },
+              { icon: Rocket, label: 'Stage', value: 'In Development' },
+              { icon: Target, label: 'Round', value: 'Pre-Seed' },
+              { icon: MapPin, label: 'Built By', value: 'BizMeals Team' },
             ].map((s) => {
               const I = s.icon
               return (
@@ -687,12 +693,22 @@ function FeaturedSoupCafe({ onOpen }: { onOpen: () => void }) {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
+            {/* Download Pitch Deck — primary CTA */}
+            {featured.pitchDeckUrl && (
+              <a
+                href={featured.pitchDeckUrl}
+                download
+                className="btn-cta border-0 font-bold text-xs sm:text-sm px-6 py-5 h-auto cursor-pointer inline-flex items-center justify-center"
+              >
+                <Download className="w-4 h-4 mr-1.5" />
+                {featured.pitchDeckLabel || 'Download Pitch Deck'}
+              </a>
+            )}
             <Button
               onClick={onOpen}
-              className="btn-cta border-0 font-bold text-xs sm:text-sm px-6 py-5 h-auto cursor-pointer"
+              className="bg-white/10 border border-white/20 text-white hover:bg-white/20 hover:text-white font-bold text-xs sm:text-sm px-6 py-5 h-auto cursor-pointer"
             >
-              <Soup className="w-4 h-4 mr-1.5" />
-              Read the Full Pitch
+              Read the Pitch
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Button>
             <Button
@@ -858,14 +874,28 @@ function PitchModal({ project, open, onOpenChange }: { project: PitchProject | n
             <p className="text-[12px] text-white/70 mb-4 max-w-md mx-auto leading-relaxed">
               We have a complete roadmap and execution plan. If you&apos;re an investor or partner who shares our passion, let&apos;s talk.
             </p>
-            <Button
-              onClick={() => onOpenChange(false)}
-              className="btn-cta border-0 font-bold text-xs px-6 py-4 h-auto cursor-pointer"
-            >
-              <Handshake className="w-4 h-4 mr-1.5" />
-              Express Interest
-              <ArrowRight className="w-4 h-4 ml-1.5" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              {/* Download Pitch Deck (only when the project has one) */}
+              {project.pitchDeckUrl && (
+                <a
+                  href={project.pitchDeckUrl}
+                  download
+                  className="inline-flex items-center justify-center btn-cta border-0 font-bold text-xs px-6 py-4 h-auto cursor-pointer"
+                >
+                  <Download className="w-4 h-4 mr-1.5" />
+                  {project.pitchDeckLabel || 'Download Pitch Deck'}
+                </a>
+              )}
+              <Button
+                onClick={() => onOpenChange(false)}
+                variant="outline"
+                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white font-bold text-xs px-6 py-4 h-auto cursor-pointer"
+              >
+                <Handshake className="w-4 h-4 mr-1.5" />
+                Express Interest
+                <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </div>
           </section>
         </div>
       </DialogContent>

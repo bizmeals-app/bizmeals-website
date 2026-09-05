@@ -29,6 +29,9 @@ import {
   Award,
   Briefcase,
   Globe,
+  Check,
+  X,
+  Lightbulb,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePage } from '@/components/bizmeals/page-context'
@@ -191,41 +194,41 @@ function HeroSection() {
             BUSINESS GROWTH EXECUTION PARTNER
           </motion.div>
 
-          {/* TAGLINE — "Not an Agency" is now a tagline (small), not the heading */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="inline-flex items-center gap-2.5 text-base sm:text-lg font-semibold tracking-wide mb-5"
-          >
-            <span className="h-px w-8 bg-[#F5A623]" aria-hidden="true" />
-            <span className="italic text-[#F5A623]">Not an Agency.</span>
-            <span className="text-white/70">A Growth Partner.</span>
-          </motion.p>
-
-          {/* H1 — staggered words + rotating attention word */}
+          {/* H1 — entity-clear, aligns with the title tag (same core topic, not a duplicate) */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-white">
             <span className="block">
-              <StaggerHeading words={['We', 'Build', 'Brands.']} baseDelay={0.15} />
+              <StaggerHeading words={['BizMeals:']} baseDelay={0.15} />
             </span>
             <span className="block mt-1">
-              <StaggerHeading words={['We', 'Engineer']} baseDelay={0.45} />
-              <RotatingWord
-                words={['Growth.', 'Revenue.', 'Scale.', 'Impact.']}
-                className="text-[#F5A623]"
-              />
+              <StaggerHeading words={['Business', 'Growth']} baseDelay={0.35} />
+              <span className="text-[#F5A623]"> Execution Partner.</span>
             </span>
           </h1>
 
-          {/* Subhead */}
+          {/* Rotating brand line (preserved animation) */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="text-xl md:text-2xl text-white/80 mt-4"
+          >
+            We engineer{' '}
+            <RotatingWord
+              words={['growth.', 'revenue.', 'scale.', 'impact.']}
+              className="text-[#F5A623]"
+            />
+          </motion.p>
+
+          {/* Top summary answer — concise bottom-line for AI extraction */}
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="text-lg md:text-xl text-white/70 mt-6 max-w-2xl leading-relaxed"
+            className="text-base md:text-lg text-white/70 mt-6 max-w-2xl leading-relaxed"
           >
-            Strategy, Execution &amp; an Expert Network — under one roof. From
-            startups to established brands, we don&apos;t just market. We engineer growth.
+            BizMeals is a Business Growth Execution Partner for startups, SMEs and founders.
+            We combine strategy, execution and an expert network to plan, execute and scale
+            growth — under one roof.
           </motion.p>
 
           {/* CTAs */}
@@ -328,6 +331,7 @@ function ClientLogosSection() {
   const loop = [...industries, ...industries]
   return (
     <section
+      id="industries"
       className="py-10 md:py-14 border-y border-[#E5E9F0] bg-white overflow-hidden"
       aria-label="Industries we serve"
     >
@@ -381,7 +385,7 @@ function ServicesSection() {
   const isInView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section className="py-20 md:py-28 relative" aria-label="Our services">
+    <section id="our-services" className="py-20 md:py-28 relative" aria-label="Our services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="What We Do"
@@ -419,6 +423,15 @@ function ServicesSection() {
                     ))}
                   </div>
                 )}
+                {/* Descriptive internal link — anchor text describes the destination */}
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage('services')}
+                  className="inline-flex items-center gap-1 mt-4 text-xs font-bold text-[#0F2557] hover:text-[#F5A623] transition-colors"
+                >
+                  Explore our {s.title.toLowerCase()} services
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </motion.div>
             )
           })}
@@ -519,32 +532,44 @@ function ProblemSection() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
-   HOW IT WORKS — 4 steps
+   HOW IT WORKS — 6 steps (AEO-optimised, mirrors the FAQ answer)
    ════════════════════════════════════════════════════════════════════════ */
 const steps = [
   {
     num: '01',
     icon: Search,
-    title: 'Understand',
-    desc: 'We deep-dive into your business, market, and goals. No templates — a custom growth map built for your reality.',
+    title: 'Understand the Business',
+    desc: 'We deep-dive into your business, market and goals. No templates — a custom growth map built for your reality.',
   },
   {
     num: '02',
-    icon: Layers,
-    title: 'Build',
-    desc: 'We assemble the right execution team from our expert network — strategy, design, ads, content, tech.',
+    icon: Target,
+    title: 'Define Strategy & Goals',
+    desc: 'We translate your reality into a clear strategy with measurable goals — positioning, channels, milestones and success metrics.',
   },
   {
     num: '03',
-    icon: Zap,
-    title: 'Execute',
-    desc: 'We don\'t hand you a plan and leave. We run the playbooks, manage the vendors, and ship the work.',
+    icon: Users,
+    title: 'Assign the Right Experts',
+    desc: 'We assemble the right execution team from our expert network — strategy, design, ads, content, tech, ops — per project, not forced onto you.',
   },
   {
     num: '04',
+    icon: Zap,
+    title: 'Execute the Project',
+    desc: 'We don\u2019t hand you a plan and leave. We run the playbooks, manage the vendors and ship the work — end to end.',
+  },
+  {
+    num: '05',
+    icon: ShieldCheck,
+    title: 'Measure Results',
+    desc: 'Every initiative is tracked against revenue and lead KPIs — not vanity metrics. You always know what is working and what is not.',
+  },
+  {
+    num: '06',
     icon: TrendingUp,
-    title: 'Scale',
-    desc: 'Once the system works, we scale it. More channels, more geography, more revenue — predictably.',
+    title: 'Optimize & Scale',
+    desc: 'Once the system works, we optimize it and scale — more channels, more geography, more revenue, predictably.',
   },
 ]
 
@@ -553,28 +578,28 @@ function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, amount: 0.15 })
 
   return (
-    <section className="py-20 md:py-28 relative" aria-label="How it works">
+    <section id="how-it-works" className="py-20 md:py-28 relative" aria-label="How BizMeals works">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="How It Works"
           badgeIcon={Sparkles}
           title="From Strategy to"
-          accent="Scale in 4 Steps"
-          subtitle="A clear, proven path — no mystery, no jargon, no hand-offs that fall through the cracks."
+          accent="Scale in 6 Steps"
+          subtitle="A clear, accountable path — no mystery, no jargon, no hand-offs that fall through the cracks."
         />
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 relative">
+        <ol ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative list-none m-0 p-0">
           {/* Connecting line */}
-          <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-[#0F2557]/10 via-[#0F2557]/20 to-[#0F2557]/10" />
+          <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-[#0F2557]/10 via-[#0F2557]/20 to-[#0F2557]/10 pointer-events-none" />
 
           {steps.map((step, i) => {
             const Icon = step.icon
             return (
-              <motion.div
+              <motion.li
                 key={step.num}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative"
               >
                 <div className="glass-card rounded-2xl p-6 card-hover h-full">
@@ -590,10 +615,10 @@ function HowItWorksSection() {
                   <h3 className="text-lg font-bold text-[#0F2557] mb-2">{step.title}</h3>
                   <p className="text-sm text-[#5A6478] leading-relaxed">{step.desc}</p>
                 </div>
-              </motion.div>
+              </motion.li>
             )
           })}
-        </div>
+        </ol>
       </div>
     </section>
   )
@@ -1041,6 +1066,379 @@ function FinalCTASection() {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
+   WHAT IS BIZMEALS — top-of-page AI answer + GEO summary
+   Directly answers "What is BizMeals?" for humans, search engines and LLMs.
+   Factual. No invented stats.
+   ════════════════════════════════════════════════════════════════════════ */
+function WhatIsBizMealsSection() {
+  return (
+    <section id="about" className="py-16 md:py-20 bg-white border-b border-[#E5E9F0]" aria-label="What is BizMeals">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FA] border border-[#D5DEEE] text-[#0F2557] text-xs font-bold tracking-wide uppercase mb-5">
+            <Sparkles className="w-3.5 h-3.5 text-[#F5A623]" />
+            What is BizMeals?
+          </span>
+          <h2 className="text-2xl md:text-4xl font-black text-[#0F2557] leading-tight mb-5 max-w-3xl mx-auto">
+            BizMeals is a Business Growth Execution Partner.
+          </h2>
+          <p className="text-base md:text-lg text-[#5A6478] leading-relaxed max-w-3xl mx-auto">
+            BizMeals helps startups, SMEs and growing businesses plan, execute and scale
+            growth. We combine strategy, consulting, digital marketing, lead generation,
+            BPO and project execution under one roof — supported by a network of trained
+            professionals, freelancers and specialist partners. Instead of handing you a
+            strategy deck, we run the work end to end.
+          </p>
+        </motion.div>
+
+        {/* GEO / AI summary — structured, machine- and human-readable */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10"
+        >
+          {[
+            { label: 'Who', value: 'BizMeals (BizMeals Management Solutions Pvt Ltd)' },
+            { label: 'What', value: 'Business Growth Execution Partner' },
+            { label: 'Serves', value: 'Startups, SMEs, growing businesses & founders' },
+            { label: 'Where', value: 'Bangalore, India — serving clients across India' },
+          ].map((item) => (
+            <div key={item.label} className="glass-card rounded-xl p-5 text-center">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#F5A623] mb-2">
+                {item.label}
+              </div>
+              <div className="text-sm font-semibold text-[#0F2557] leading-snug">{item.value}</div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* What makes the model different — concise bullets */}
+        <motion.ul
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-8 list-none p-0 m-0"
+        >
+          {[
+            'Strategy + execution in one accountable team — not a deck and a hand-off',
+            'An on-demand expert network assembled per project, not forced onto you',
+            'Revenue and leads as the only KPIs — no vanity metrics',
+          ].map((point) => (
+            <li key={point} className="flex items-start gap-2.5 text-sm text-[#5A6478]">
+              <span className="shrink-0 w-5 h-5 rounded-full bg-[#0F2557]/10 flex items-center justify-center mt-0.5">
+                <Check className="w-3 h-3 text-[#0F2557]" />
+              </span>
+              <span className="leading-snug">{point}</span>
+            </li>
+          ))}
+        </motion.ul>
+
+        {/* Internal links — descriptive anchor text to in-page sections */}
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-sm text-[#5A6478] mt-8"
+        >
+          Learn{' '}
+          <a href="#how-it-works" className="font-semibold text-[#0F2557] hover:text-[#F5A623] underline underline-offset-2">
+            how BizMeals works
+          </a>
+          , see{' '}
+          <a href="#who-we-serve" className="font-semibold text-[#0F2557] hover:text-[#F5A623] underline underline-offset-2">
+            who BizMeals is for
+          </a>
+          , or explore our{' '}
+          <a href="#our-services" className="font-semibold text-[#0F2557] hover:text-[#F5A623] underline underline-offset-2">
+            business growth services
+          </a>
+          .
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   WHO BIZMEALS IS FOR — audience clarity
+   Each audience + the business problem BizMeals solves for them.
+   ════════════════════════════════════════════════════════════════════════ */
+const audiences = [
+  {
+    icon: Rocket,
+    title: 'Startups & Founders',
+    problem: 'Need strategy, product go-to-market, first customers and fundraising support — without hiring a full team upfront.',
+    solution: 'BizMeals acts as your growth co-pilot: validate the market, build go-to-market, acquire customers and prepare for investors.',
+  },
+  {
+    icon: Building2,
+    title: 'Small & Medium Businesses',
+    problem: 'Need continuous marketing, leads and operations support without the overhead of multiple vendors or in-house hires.',
+    solution: 'A dedicated growth team under a monthly retainer — ads, SEO, content, website and back-office, all under one roof.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Growing Companies',
+    problem: 'Need to scale across channels and regions while keeping execution quality and accountability high.',
+    solution: 'End-to-end project execution with senior strategists, real-time reporting and a single point of contact.',
+  },
+  {
+    icon: Briefcase,
+    title: 'Businesses Needing Strategy + Execution',
+    problem: 'Have a goal but no clear path — and no one to run the work after the plan is made.',
+    solution: 'One partner that defines the strategy and then executes it end to end, so the gap between plan and results closes.',
+  },
+]
+
+function WhoBizMealsIsForSection() {
+  const { setCurrentPage } = usePage()
+  return (
+    <section id="who-we-serve" className="py-20 md:py-28 bg-[#F5F7FA] relative overflow-hidden" aria-label="Who BizMeals is for">
+      <div className="absolute inset-0 dot-pattern opacity-50 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SectionHeading
+          badge="Who BizMeals Is For"
+          badgeIcon={Users}
+          title="Built for the people who"
+          accent="actually run businesses"
+          subtitle="Whether you are just starting out or scaling fast, BizMeals plugs in as the growth partner you do not have to manage."
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {audiences.map((a, i) => {
+            const Icon = a.icon
+            return (
+              <motion.div
+                key={a.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="glass-card rounded-2xl p-6 card-hover"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#EEF2FA] flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-[#0F2557]" />
+                </div>
+                <h3 className="text-lg font-bold text-[#0F2557] mb-2">{a.title}</h3>
+                <p className="text-sm text-[#5A6478] leading-relaxed mb-3">
+                  <span className="font-semibold text-[#0F2557]">The problem:</span> {a.problem}
+                </p>
+                <p className="text-sm text-[#5A6478] leading-relaxed">
+                  <span className="font-semibold text-[#0F2557]">How BizMeals helps:</span> {a.solution}
+                </p>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Use-case clarity — when to use BizMeals, which use cases, which industries */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center text-sm text-[#5A6478] max-w-3xl mx-auto mt-10 leading-relaxed"
+        >
+          <span className="font-semibold text-[#0F2557]">When to use BizMeals:</span> when you need both
+          strategy and execution — for launching a startup, scaling an SME, entering a new market, or
+          running continuous growth across industries including{' '}
+          <span className="font-semibold text-[#0F2557]">manufacturing, real estate, e-commerce, healthcare, education and more</span>.
+        </motion.p>
+
+        <div className="text-center mt-8">
+          <button
+            type="button"
+            onClick={() => setCurrentPage('contact')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
+            style={{ background: 'linear-gradient(135deg, #0F2557 0%, #1E3A8A 100%)' }}
+          >
+            Talk to BizMeals about your business
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   BIZMEALS vs TRADITIONAL AGENCIES — factual comparison
+   Defensible, no unsupported superiority claims.
+   ════════════════════════════════════════════════════════════════════════ */
+const comparisonRows = [
+  { factor: 'Strategy', bizmeals: 'Defined with you and executed by the same team', agency: 'Often a deck handed over separately from execution' },
+  { factor: 'Execution', bizmeals: 'Hands-on, end to end — playbooks, vendors, shipping', agency: 'Usually siloed across departments or outsourced' },
+  { factor: 'Expert Network', bizmeals: 'On-demand specialists assembled per project', agency: 'Fixed in-house team, often generalist' },
+  { factor: 'Project Management', bizmeals: 'One accountable partner owns delivery', agency: 'Client often becomes the project manager' },
+  { factor: 'Capabilities', bizmeals: 'Marketing, consulting, BPO, web, events in one', agency: 'Typically marketing-only' },
+  { factor: 'Startup Support', bizmeals: 'Equity, hybrid and founder-friendly models', agency: 'Fixed retainers, rarely equity-friendly' },
+  { factor: 'Scalability', bizmeals: 'Scale up or down per project and stage', agency: 'Tied to retainer tiers and headcount' },
+  { factor: 'Engagement Model', bizmeals: 'Project, retainer, equity or hybrid', agency: 'Mostly monthly retainers' },
+]
+
+function BizMealsVsAgenciesSection() {
+  return (
+    <section id="bizmeals-vs-agencies" className="py-20 md:py-28 bg-white relative overflow-hidden" aria-label="BizMeals vs traditional agencies">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SectionHeading
+          badge="The Difference"
+          badgeIcon={ShieldCheck}
+          title="BizMeals vs"
+          accent="Traditional Agencies"
+          subtitle="A factual comparison of how the two models actually work — no unsupported claims."
+        />
+
+        <motion.table
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="w-full glass-card rounded-2xl overflow-hidden border border-[#E5E9F0] border-collapse"
+        >
+          <caption className="sr-only">
+            Comparison of BizMeals (Business Growth Execution Partner) vs a traditional agency
+            across strategy, execution, expert network, project management, capabilities,
+            startup support, scalability and engagement model.
+          </caption>
+          <thead className="bg-[#0F2557] text-white">
+            <tr>
+              <th scope="col" className="p-4 text-left text-xs font-bold uppercase tracking-wider text-white/70">Factor</th>
+              <th scope="col" className="p-4 text-left text-xs font-bold uppercase tracking-wider text-[#F5A623]">BizMeals</th>
+              <th scope="col" className="p-4 text-left text-xs font-bold uppercase tracking-wider text-white/70">Traditional Agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row, i) => (
+              <tr key={row.factor} className={i % 2 === 0 ? 'bg-white' : 'bg-[#F5F7FA]'}>
+                <th scope="row" className="p-4 text-left text-sm font-semibold text-[#0F2557] align-top">{row.factor}</th>
+                <td className="p-4 text-sm text-[#5A6478] leading-snug align-top">
+                  <span className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-[#0F2557] shrink-0 mt-0.5" />
+                    <span>{row.bizmeals}</span>
+                  </span>
+                </td>
+                <td className="p-4 text-sm text-[#5A6478] leading-snug align-top">
+                  <span className="flex items-start gap-2">
+                    <X className="w-4 h-4 text-[#9CA3AF] shrink-0 mt-0.5" />
+                    <span>{row.agency}</span>
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </motion.table>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   HOMEPAGE FAQ — question-based headings (AEO) + answers.
+   Mirrors the FAQPage JSON-LD in src/lib/structured-data.ts.
+   ════════════════════════════════════════════════════════════════════════ */
+const homepageFaqs = [
+  {
+    q: 'What is BizMeals?',
+    a: 'BizMeals is a Business Growth Execution Partner. We help startups, SMEs and growing businesses plan, execute and scale growth by combining strategy, consulting, digital marketing, lead generation, BPO and project execution under one roof — supported by a network of trained professionals, freelancers and specialist partners.',
+  },
+  {
+    q: 'Is BizMeals a digital marketing agency?',
+    a: 'No. Digital marketing is one of the services we provide, but BizMeals is positioned as a Business Growth Execution Partner. We cover strategy, consulting, execution, operations and project management — not only marketing campaigns.',
+  },
+  {
+    q: 'Who does BizMeals help?',
+    a: 'BizMeals works with startups, small and medium businesses, growing companies and founders who need both strategy and execution support. We also work with established enterprises that need a dedicated execution partner.',
+  },
+  {
+    q: 'What services does BizMeals provide?',
+    a: 'BizMeals provides business growth strategy and consulting, digital marketing (SEO, social media, paid ads), lead generation, BPO and back-office services, project execution, and website development — all managed under one accountable partner.',
+  },
+  {
+    q: 'How does BizMeals work?',
+    a: 'BizMeals works in six steps: (1) understand the business, (2) define strategy and goals, (3) assign the right experts, (4) execute the project, (5) measure results, and (6) optimize and scale. One team owns strategy through execution so nothing falls through the cracks.',
+  },
+  {
+    q: 'How is BizMeals different from a traditional agency?',
+    a: 'Traditional agencies typically hand over a strategy deck and silo execution. BizMeals combines strategy and execution in one team, brings an on-demand expert network, manages projects end to end, and ties success to revenue rather than vanity metrics. Founders get one accountable partner instead of multiple uncoordinated vendors.',
+  },
+  {
+    q: 'How can BizMeals help a startup?',
+    a: 'For startups, BizMeals acts as a growth co-pilot — helping validate the market, build the go-to-market, acquire the first customers, set up marketing and operations, and prepare for fundraising. Founders can also engage on equity or hybrid models so incentives stay aligned.',
+  },
+  {
+    q: 'How can BizMeals help a small business grow?',
+    a: 'For small and medium businesses, BizMeals runs continuous growth — digital marketing, lead generation, SEO, website optimization and back-office support — under a monthly retainer, so owners get a full growth team without hiring in-house.',
+  },
+  {
+    q: 'Where is BizMeals located and which areas does it serve?',
+    a: 'BizMeals is based in Bangalore, Karnataka, India and serves clients across India through a digital-first, remote-friendly delivery model.',
+  },
+  {
+    q: 'How can I contact BizMeals?',
+    a: `You can contact BizMeals by phone at ${siteConfig.contact.phone} or ${siteConfig.contact.phone2}, by email at ${siteConfig.contact.email}, or through the contact form on the website. WhatsApp is also available for quick conversations.`,
+  },
+]
+
+function HomepageFAQSection() {
+  const { setCurrentPage } = usePage()
+  return (
+    <section id="faq" className="py-20 md:py-28 bg-[#F5F7FA] relative overflow-hidden" aria-label="BizMeals frequently asked questions">
+      <div className="absolute inset-0 dot-pattern opacity-50 pointer-events-none" />
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SectionHeading
+          badge="Questions & Answers"
+          badgeIcon={Lightbulb}
+          title="Common questions about"
+          accent="BizMeals"
+          subtitle="Direct answers to what founders and business owners usually ask before reaching out."
+        />
+
+        {/* Always-visible Q&A — each question heading is immediately followed
+            by its answer paragraph so search engines and AI answer engines
+            can extract the answer from the initial HTML. */}
+        <div className="space-y-4">
+          {homepageFaqs.map((faq, i) => (
+            <motion.div
+              key={faq.q}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.3) }}
+              className="glass-card rounded-xl border border-[#E5E9F0] p-4 sm:p-5"
+            >
+              <h3 className="text-sm sm:text-base font-bold text-[#0F2557] mb-2">{faq.q}</h3>
+              <p className="text-sm text-[#5A6478] leading-relaxed">{faq.a}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <button
+            type="button"
+            onClick={() => setCurrentPage('contact')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white cursor-pointer"
+            style={{ background: 'linear-gradient(135deg, #0F2557 0%, #1E3A8A 100%)' }}
+          >
+            Contact BizMeals
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ════════════════════════════════════════════════════════════════════════
    PAGE COMPOSITION
    ════════════════════════════════════════════════════════════════════════ */
 export default function HomePage() {
@@ -1048,13 +1446,17 @@ export default function HomePage() {
     <>
       <HeroSection />
       <ClientLogosSection />
+      <WhatIsBizMealsSection />
       <ServicesSection />
+      <WhoBizMealsIsForSection />
       <ProblemSection />
       <HowItWorksSection />
       <WhyChooseSection />
+      <BizMealsVsAgenciesSection />
       <ResultsSection />
       <TestimonialsSection />
       <FounderSection />
+      <HomepageFAQSection />
       <FinalCTASection />
     </>
   )

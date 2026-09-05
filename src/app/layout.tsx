@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/lib/site-config";
+import { bizmealsStructuredData } from "@/lib/structured-data";
+import AppShell from "@/components/bizmeals/app-shell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -78,11 +80,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Structured data (JSON-LD) — server-rendered so search engines and
+            AI answer engines receive entity, service and FAQ data in the
+            initial HTML. See src/lib/structured-data.ts */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(bizmealsStructuredData),
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
-        {children}
+        <AppShell>{children}</AppShell>
         <Toaster />
       </body>
     </html>

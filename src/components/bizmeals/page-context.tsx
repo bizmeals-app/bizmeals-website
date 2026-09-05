@@ -1,8 +1,60 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, ReactNode } from 'react'
+import { createContext, useContext, useCallback, useMemo, ReactNode } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
-export type PageName = 'home' | 'how-it-works' | 'services' | 'portfolio' | 'innovation-lab' | 'pricing' | 'training' | 'blog' | 'about' | 'founder' | 'contact' | 'career' | 'privacy-policy' | 'terms-of-service' | 'refund-policy' | 'cookie-policy' | 'disclaimer'
+/**
+ * BizMeals — page context (router-backed)
+ *
+ * The site now uses real Next.js routes (/services, /about, /contact, …).
+ * `currentPage` is derived from the current URL pathname, and `setCurrentPage`
+ * navigates to the corresponding route. Existing call sites that use
+ * `setCurrentPage('services')` keep working but now produce real crawlable
+ * URLs like https://bizmeals.in/services.
+ */
+export type PageName =
+  | 'home'
+  | 'how-it-works'
+  | 'services'
+  | 'portfolio'
+  | 'innovation-lab'
+  | 'pricing'
+  | 'training'
+  | 'blog'
+  | 'about'
+  | 'founder'
+  | 'contact'
+  | 'career'
+  | 'privacy-policy'
+  | 'terms-of-service'
+  | 'refund-policy'
+  | 'cookie-policy'
+  | 'disclaimer'
+
+const VALID_PAGES: PageName[] = [
+  'home',
+  'how-it-works',
+  'services',
+  'portfolio',
+  'innovation-lab',
+  'pricing',
+  'training',
+  'blog',
+  'about',
+  'founder',
+  'contact',
+  'career',
+  'privacy-policy',
+  'terms-of-service',
+  'refund-policy',
+  'cookie-policy',
+  'disclaimer',
+]
+
+function pathToPage(pathname: string): PageName {
+  const segment = pathname.replace(/^\//, '').split('/')[0] || 'home'
+  return (VALID_PAGES as string[]).includes(segment) ? (segment as PageName) : 'home'
+}
 
 interface PageContextType {
   currentPage: PageName
@@ -15,12 +67,22 @@ const PageContext = createContext<PageContextType>({
 })
 
 export function PageProvider({ children }: { children: ReactNode }) {
-  const [currentPage, setCurrentPageState] = useState<PageName>('home')
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const setCurrentPage = useCallback((page: PageName) => {
-    setCurrentPageState(page)
-    window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [])
+  const currentPage = useMemo(() => pathToPage(pathname || '/'), [pathname])
+
+  const setCurrentPage = useCallback(
+    (page: PageName) => {
+      const href = page === 'home' ? '/' : `/${page}`
+      router.push(href)
+      // Scroll to top on navigation, mirroring the previous SPA behavior.
+      if (typeof window !== 'undefined') {
+        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+      }
+    },
+    [router],
+  )
 
   return (
     <PageContext.Provider value={{ currentPage, setCurrentPage }}>

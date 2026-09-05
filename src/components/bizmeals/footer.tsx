@@ -121,11 +121,11 @@ export default function Footer() {
               your business.
             </p>
 
-            {/* Trust badge — consistent 12+ years */}
+            {/* Trust badge — expert-team positioning (no years-in-business claim). */}
             <div className="flex items-center gap-2 mb-5 px-3 py-2 rounded-lg bg-[#F5A623]/10 border border-[#F5A623]/25 max-w-fit">
               <Award className="w-4 h-4 text-[#F5A623]" />
               <span className="text-[10px] font-bold text-[#F5A623] uppercase tracking-wider">
-                {siteConfig.stats.yearsInBusiness}+ Years Experience
+                Expert Team &amp; Specialists
               </span>
             </div>
 
@@ -217,7 +217,7 @@ export default function Footer() {
         <div className="mt-10 pt-5 border-t border-white/15">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[11px] text-white/60">
-              &copy; {new Date().getFullYear()} BizMeals. All rights reserved.
+              &copy; 2024 BizMeals. All rights reserved.
             </p>
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <button

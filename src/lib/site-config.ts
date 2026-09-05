@@ -95,26 +95,33 @@ export const siteConfig = {
 
   /* ── SEO ── */
   seo: {
-    title: 'BizMeals — Business Growth Execution Partner | Bangalore',
+    title: 'BizMeals — Business Growth Execution Partner for Startups & SMEs',
     description:
-      'Not an Agency. A Growth Partner. BizMeals combines Strategy, Execution, and an Expert Network to build & scale businesses. 12+ years, 50+ clients served.',
+      'BizMeals is a Business Growth Execution Partner for startups, SMEs and founders — strategy, marketing, BPO and project execution in one expert team.',
     keywords: [
       'BizMeals',
+      'Business Growth Execution Partner',
       'Business Growth Partner',
       'Growth Execution Partner',
-      'Digital Marketing Bangalore',
+      'Digital Marketing India',
+      'Lead Generation',
+      'Business Consulting',
+      'BPO Services',
+      'Project Execution',
       'Startup Consulting India',
       'Business Scaling',
-      'Manjunatha Reddy Polaka',
+      'Bangalore Business Growth',
     ],
     ogImage: '/logo.png',
     url: 'https://bizmeals.in',
   },
 } as const
 
-/* ── Hero trust bar (consistent with stats above) ── */
+/* ── Hero trust bar ──
+   We do not advertise a years-in-business claim. The trust bar leads with
+   the expert-team positioning (factual, defensible). */
 export const heroTrustBar = [
-  { value: `${siteConfig.stats.yearsInBusiness}+`, label: 'Years in Business' },
+  { value: 'Expert', label: 'Team & Specialists' },
   { value: `${siteConfig.stats.clientsServed}+`, label: 'Clients Served' },
   { value: `${siteConfig.stats.industriesServed}+`, label: 'Industries Served' },
   { value: `${siteConfig.stats.citiesCovered}`, label: 'Cities Covered' },
