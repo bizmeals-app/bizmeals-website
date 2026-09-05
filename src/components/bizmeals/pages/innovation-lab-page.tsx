@@ -13,6 +13,7 @@ import {
   Sparkles,
   CheckCircle2,
   FlaskConical,
+  Soup,
   Smartphone,
   Download,
   Target,
@@ -81,64 +82,64 @@ const projects: PitchProject[] = [
     icon: Smartphone,
     title: 'StayEG',
     tagline:
-      'StayEG is an application currently in development — a pre-seed stage product built by the BizMeals team. Full details are in the pitch deck below.',
-    category: 'Software · Application',
+      "The trust layer for India's unorganized PG (Paying Guest) market — a free verified digital identity for PG owners, and a reliable discovery experience for tenants.",
+    category: 'PropTech · Marketplace · SaaS',
     problem:
-      'Finding and booking quality stays online is fragmented, slow, and inconsistent across platforms. Travellers and hosts both lack a single trusted, application-first experience that makes the process simple and reliable.',
+      "India's PG market runs on trust nobody can verify. Tenants can't confirm a PG is real, safe, or accurately priced before showing up — pricing is opaque and reviews are unreliable. PG owners have no digital presence at all and are invisible to renters searching online, so vacant beds sit empty while listings go to word-of-mouth only. ~95% of India's ~7.7M PG beds are unorganized.",
     solution:
-      'StayEG is being built as a focused, application-first product that simplifies how stays are discovered, evaluated and booked — with a clean user experience for guests and a simple onboarding flow for hosts. The product is currently in development.',
+      "StayEG starts with a free, verified digital identity for every PG owner — photos, real pricing, amenities, and a trust badge. This free wedge gets owners in the door and gives tenants a reliable place to discover PGs. Once owners see real tenant enquiries, StayEG layers in paid promoted listings, booking assistance, and eventually owner SaaS (rent tracking, tenant management, payments).",
     market:
-      'The global online travel & accommodation market continues to grow rapidly, with mobile-first booking adoption accelerating across India and emerging markets. A focused, well-designed application can capture share in this expanding category.',
+      "India has ~7.7M PG beds; only ~5% are served by any organized/digital player today. ~50M urban migrants aged 20–34 relocate for work or study annually. The organized co-living/PG category is forecast to grow at a 17–38% CAGR through 2030. TAM is estimated at ₹840–1,120 Cr, with a Year-3 SOM target of ₹8–12 Cr ARR across 2–3 focus cities.",
     businessModel:
-      'Application-based model with commission on bookings, host listings, and premium guest features. Exact unit economics are being validated during the build phase and detailed in the pitch deck.',
+      "Free to start, revenue follows proven demand. Revenue lines: free verified identity (live wedge), promoted/featured listings (~₹1,000 / 100 leads, to test), owner SaaS subscription (~₹1,500 / month, to test), and a payment take rate (~0.5% of rent volume, Phase 3). Blended paying-PG ARPU assumption of ₹30,000–40,000/year is unvalidated and is the #1 thing the pre-seed capital is used to test.",
     roadmap: [
       {
-        phase: 'Phase 1 — Product Build',
-        timeline: 'In Progress',
+        phase: 'Phase 1 — Validate + Launch',
+        timeline: 'Months 0–9',
         milestones: [
-          'Define product scope and core user flows',
-          'Design and build the application (in development)',
-          'Finalise the pre-seed pitch deck (available below)',
-          'Prepare for early user validation',
+          'Structured owner interviews (15–20) to test pricing & willingness to pay',
+          'Pick & launch 1 city with free verified-identity onboarding',
+          'Onboard 50–100 live paying-eligible PGs in a dense micro-market',
+          'Measure real tenant pull and owner engagement',
         ],
       },
       {
-        phase: 'Phase 2 — Validation & Launch',
-        timeline: 'Next',
+        phase: 'Phase 2 — Prove the Model',
+        timeline: 'Months 9–18',
         milestones: [
-          'Onboard first hosts and listings',
-          'Run early-user validation and feedback loops',
-          'Refine product based on real usage',
+          'Scale to 500–1,000 PGs',
+          'Enter a 2nd city',
+          'Confirm retention and unit economics',
           'Prepare for seed fundraise',
         ],
       },
       {
-        phase: 'Phase 3 — Growth',
-        timeline: 'Post-launch',
+        phase: 'Phase 3 — Scale Toward Target',
+        timeline: 'Year 2–3',
         milestones: [
-          'Expand listings and geographies',
-          'Build host and guest growth loops',
-          'Introduce premium features',
-          'Scale the team and operations',
+          'Reach 2,500–3,000 paying PGs across 2–3 cities',
+          'Target ₹8–12 Cr ARR',
+          '~₹100 Cr valuation at a ~10x multiple, if metrics hold',
+          'Layer in payments and full owner SaaS',
         ],
       },
       {
-        phase: 'Phase 4 — Scale',
-        timeline: 'Long-term',
+        phase: 'Phase 4 — Long-term',
+        timeline: 'Year 3+',
         milestones: [
-          'Establish StayEG as a trusted stays brand',
+          'Expand to more cities and micro-markets',
+          'Deepen the trust graph and payments volume',
           'Explore adjacent product lines',
-          'Series fundraise for national expansion',
         ],
       },
     ],
-    ask: 'Raising pre-seed capital to complete the application build and run early user validation. Open to angel investors, product mentors, and strategic partners. Full details are in the StayEG Pre-Seed Pitch Deck.',
+    ask: 'Raising ₹65–75 Lakhs pre-seed for 12 months of runway — to validate or kill the model. Use of funds: product development (₹22L), onboarding & ops (₹11L), founder salaries (₹15L), office & infra (₹7L), buffer (₹11L). Full details are in the StayEG Pre-Seed Pitch Deck below.',
     partnerFit:
-      'Product builders, early-stage investors, and partners in the travel & stays ecosystem who want to get involved at the pre-seed stage of an application-first product.',
+      'Pre-seed angel investors, PropTech mentors, and partners in the real-estate / co-living ecosystem who want to back an asset-light, founder-led play in a large, underserved market.',
     status: 'In Progress',
-    vision: 'To build a trusted, application-first product that makes discovering and booking stays simple, reliable and delightful.',
-    raiseTag: 'Pre-Seed',
-    seekingTag: 'Investors & Product Partners',
+    vision: 'To become the trust layer for India\'s unorganized PG market — making verified, reliable PG discovery the default for tenants and owners alike.',
+    raiseTag: '₹65–75L Pre-Seed',
+    seekingTag: 'Investors & PropTech Partners',
     featured: true,
     gradientFromTo: 'from-[#F5A623] to-[#D88A0E]',
     iconColor: 'text-[#F5A623]',
@@ -148,6 +149,77 @@ const projects: PitchProject[] = [
     statusBg: 'bg-[#F5A623]/10 border-[#F5A623]/30',
     pitchDeckUrl: '/StayEG-PreSeed-PitchDeck.pptx',
     pitchDeckLabel: 'StayEG Pre-Seed Pitch Deck',
+  },
+  {
+    id: 'soup-cafe',
+    icon: Soup,
+    title: 'Soup Cafe',
+    tagline:
+      "India's first dedicated soup cafe chain — serving healthy, comforting, on-the-go soups that replace India's unhealthy snacking habit.",
+    category: 'F&B · QSR · Health',
+    problem:
+      "India's urban snack culture is dominated by deep-fried, sugary, and heavy fast food. There is no dedicated, branded, healthy soup-on-the-go option — even though soup is universally loved, affordable to produce, and naturally healthy. The gap between 'canned soup' and 'restaurant soup' is completely unbranded.",
+    solution:
+      'A quick-service soup cafe chain serving freshly-made, regionally-flavoured soups in a modern, takeaway-friendly format. Think of it as the "Chai point" for soup — consistent quality, 5-minute service, affordable pricing (₹79–₹149), and a menu that blends global favourites with Indian regional classics (Rasam, Dal Shorba, Tomato Shorba, Palak, sweet corn) plus international bowls.',
+    market:
+      "India's QSR market is projected to cross ₹70,000 Cr by 2027 (growing ~18% CAGR). The health-conscious urban consumer segment is 50M+ and expanding fast. Soup as a category is largely unorganised — no national brand exists. First-mover advantage is available right now.",
+    businessModel:
+      'Company-owned flagship stores in tier-1 cities + a franchise model for tier-2/3 expansion. Revenue streams: dine-in & takeaway (60%), delivery via Zomato/Swiggy (30%), subscription (daily soup plans for offices & health-conscious individuals, 10%). Gross margins of 65–70% per bowl.',
+    roadmap: [
+      {
+        phase: 'Phase 1 — Pilot Store',
+        timeline: 'Months 1–4',
+        milestones: [
+          'Finalise recipes & SOPs (25-SKU menu)',
+          'Launch first flagship cafe in Bangalore',
+          'Build brand identity & supply chain',
+          'Validate unit economics (target ₹3L/month revenue)',
+        ],
+      },
+      {
+        phase: 'Phase 2 — City Expansion',
+        timeline: 'Months 5–12',
+        milestones: [
+          'Open 4–5 stores across Bangalore',
+          'Launch delivery & subscription app',
+          'Central kitchen for the city',
+          'Build the core operating team',
+        ],
+      },
+      {
+        phase: 'Phase 3 — Multi-City',
+        timeline: 'Year 2',
+        milestones: [
+          'Enter 3 new tier-1 cities (Hyderabad, Pune, Chennai)',
+          'Open franchise model for tier-2 cities',
+          'Launch packaged soup retail line',
+          'Target 30+ stores nationwide',
+        ],
+      },
+      {
+        phase: 'Phase 4 — National Brand',
+        timeline: 'Year 3–5',
+        milestones: [
+          '150+ stores across India',
+          'Series A/B fundraise',
+          'Explore own D2C packaged-soup brand',
+          'Position as "India\'s Soup Brand"',
+        ],
+      },
+    ],
+    ask: 'Raising ₹40–60 Lakhs seed capital for the pilot store, brand build, and first 6 months of operations. Open to angel investors, F&B mentors, and strategic partners.',
+    partnerFit:
+      "Food & beverage operators, real-estate partners (high-footfall locations in Bangalore), supply-chain & sourcing partners, cloud-kitchen investors, and angel investors passionate about building India's first soup brand.",
+    status: 'Concept',
+    vision: 'To become India\'s first and largest dedicated soup cafe brand — making healthy, comforting soup a daily habit, not a seasonal afterthought.',
+    raiseTag: '₹40–60L Seed',
+    seekingTag: 'Investors & F&B Partners',
+    gradientFromTo: 'from-[#10B981] to-[#0EA5E9]',
+    iconColor: 'text-[#10B981]',
+    iconBg: 'bg-[#10B981]/10',
+    borderColor: 'border-[#10B981]/30',
+    statusColor: 'text-[#10B981]',
+    statusBg: 'bg-[#10B981]/10 border-[#10B981]/30',
   },
   {
     id: 'drone-delivery',
@@ -657,29 +729,29 @@ function FeaturedSoupCafe({ onOpen }: { onOpen: () => void }) {
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-[#F5A623]/30 text-[#F5A623] text-[10px] font-bold uppercase tracking-wider">
               <Smartphone className="w-3 h-3" />
-              Software · Application
+              PropTech · Marketplace
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white text-[10px] font-bold uppercase tracking-wider">
-              In Development
+              In Progress · MVP Built
             </span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-[1.1] mb-3">
-            StayEG — <span className="text-[#F5A623]">An Application in Development</span>
+            StayEG — <span className="text-[#F5A623]">India&apos;s PG Trust Layer</span>
           </h3>
           <p className="text-sm sm:text-base text-white/75 leading-relaxed mb-5 max-w-xl">
-            StayEG is a pre-seed stage application currently being built by the BizMeals team.
-            The product is in development — and we&apos;re sharing the full pre-seed pitch deck with
-            investors and partners who want to get involved early.
+            The trust layer for India&apos;s unorganized PG (Paying Guest) market. A free, verified digital
+            identity for PG owners, and a reliable discovery experience for tenants — backed by a working
+            MVP and a clear pre-seed plan. Full details in the pitch deck below.
           </p>
 
           {/* Quick stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {[
-              { icon: Smartphone, label: 'Type', value: 'Application' },
-              { icon: Rocket, label: 'Stage', value: 'In Development' },
-              { icon: Target, label: 'Round', value: 'Pre-Seed' },
-              { icon: MapPin, label: 'Built By', value: 'BizMeals Team' },
+              { icon: MapPin, label: 'Market', value: '7.7M PG beds' },
+              { icon: TrendingUp, label: 'TAM', value: '₹840–1,120 Cr' },
+              { icon: Target, label: 'Round', value: '₹65–75L Pre-Seed' },
+              { icon: Rocket, label: 'Stage', value: 'MVP Built' },
             ].map((s) => {
               const I = s.icon
               return (
